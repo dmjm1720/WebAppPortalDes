@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2020 01:37:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.model.PagoGto" table="PAGO_GTO" schema="dbo" catalog="PortalProvNac" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="fechapago" type="string">
+            <column name="FECHAPAGO" length="50" />
+        </property>
+        <property name="formadepago" type="string">
+            <column name="FORMADEPAGO" length="150" />
+        </property>
+        <property name="monedapago" type="string">
+            <column name="MONEDAPAGO" length="20" />
+        </property>
+        <property name="monto" type="big_decimal">
+            <column name="MONTO" scale="4" />
+        </property>
+        <property name="numoperacion" type="string">
+            <column name="NUMOPERACION" length="150" />
+        </property>
+        <property name="rfcemisorctaben" type="string">
+            <column name="RFCEMISORCTABEN" length="50" />
+        </property>
+        <property name="ctabeneficiario" type="string">
+            <column name="CTABENEFICIARIO" length="150" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="UUID" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

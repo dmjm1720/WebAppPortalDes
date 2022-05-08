@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="hibernate.connection.url">jdbc:sqlserver://WIN-S71RN93JOSS\SQLEXPRESS;databaseName=PortalProvNac</property>
+    <property name="hibernate.connection.username">sa</property>
+    <property name="hibernate.connection.password">P0rt4lDesaM3x</property>
+<!--    <property name="hibernate.connection.url">jdbc:sqlserver://DESKTOP-M746TH5\SQLEXPRESS;databaseName=PortalProvNac</property>
+    <property name="hibernate.connection.username">sa</property>
+    <property name="hibernate.connection.password">dev22</property>-->
+    <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="mx/model/PagaM01.hbm.xml"/>
+    <mapping resource="mx/model/Cuentas.hbm.xml"/>
+    <mapping resource="mx/model/Pago.hbm.xml"/>
+    <mapping resource="mx/model/FacturaGastosProv.hbm.xml"/>
+    <mapping resource="mx/model/FacturaComplemento.hbm.xml"/>
+    <mapping resource="mx/model/DiasPago.hbm.xml"/>
+    <mapping resource="mx/model/ConceptoGastosProv.hbm.xml"/>
+    <mapping resource="mx/model/Comunicado.hbm.xml"/>
+    <mapping resource="mx/model/Deposito.hbm.xml"/>
+    <mapping resource="mx/model/Factura.hbm.xml"/>
+    <mapping resource="mx/model/ConceptoPagosComp.hbm.xml"/>
+    <mapping resource="mx/model/FacturaGastos.hbm.xml"/>
+    <mapping resource="mx/model/Queja.hbm.xml"/>
+    <mapping resource="mx/model/Concepto.hbm.xml"/>
+    <mapping resource="mx/model/Mensaje.hbm.xml"/>
+    <mapping resource="mx/model/ConceptoPagosCompGto.hbm.xml"/>
+    <mapping resource="mx/model/ConceptoComplemento.hbm.xml"/>
+    <mapping resource="mx/model/ConceptoComplementoGto.hbm.xml"/>
+    <mapping resource="mx/model/ConceptoGastos.hbm.xml"/>
+    <mapping resource="mx/model/FacturaComplementoGto.hbm.xml"/>
+    <mapping resource="mx/model/Usuario.hbm.xml"/>
+    <mapping resource="mx/model/PagoGto.hbm.xml"/>
+    <mapping resource="mx/model/Correo.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

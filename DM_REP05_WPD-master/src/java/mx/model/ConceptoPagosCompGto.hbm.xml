@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2020 01:37:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.model.ConceptoPagosCompGto" table="CONCEPTO_PAGOS_COMP_GTO" schema="dbo" catalog="PortalProvNac" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="iddocumento" type="string">
+            <column name="IDDOCUMENTO" length="150" />
+        </property>
+        <property name="serie" type="string">
+            <column name="SERIE" length="10" />
+        </property>
+        <property name="folio" type="string">
+            <column name="FOLIO" length="50" />
+        </property>
+        <property name="monedadr" type="string">
+            <column name="MONEDADR" length="50" />
+        </property>
+        <property name="metododepagodr" type="string">
+            <column name="METODODEPAGODR" length="150" />
+        </property>
+        <property name="numparcialidad" type="string">
+            <column name="NUMPARCIALIDAD" length="50" />
+        </property>
+        <property name="impsaldoant" type="string">
+            <column name="IMPSALDOANT" length="50" />
+        </property>
+        <property name="imppagado" type="string">
+            <column name="IMPPAGADO" length="50" />
+        </property>
+        <property name="impsaldoinsoluto" type="string">
+            <column name="IMPSALDOINSOLUTO" length="50" />
+        </property>
+        <property name="factura" type="string">
+            <column name="FACTURA" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

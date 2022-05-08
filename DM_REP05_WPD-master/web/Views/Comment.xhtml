@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template/Template.xhtml">
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="900000" />
+                <p:dialog style="font-size: 15px;" header="DECORADOS Y SATINADOS MEXICANOS S.A DE C.V." widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="1280" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png"  alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 20px; font-weight: bold " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+                <h2>AGREGAR AVISO EN CORREO ELECTRÓNICO</h2> 
+
+                <!--Formulario para buscar número de referencia-->
+                <h:form>
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value="Sesión iniciada: #{loginBean.usuario.correo}"/><br></br> 
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value=" RFC: #{loginBean.usuario.rfc}"/><br></br>  
+                    <p:commandLink id="salir" 
+                                   title="CERRAR SESIÓN"
+                                   action="/index?faces-redirect=true" 
+                                   actionListener="#{loginBean.cerrarSesion()}">
+                        <h:graphicImage url="../img/exit.png" style="height: 35px"/> 
+                    </p:commandLink>
+                </h:form>
+                <h:form id="frmBuscar">
+
+                    <p:growl id="mensaje" showSummary="true" life="50000" showDetail="true"></p:growl>
+                    <p:blockUI block="pnlBuscar" trigger="buscar">   
+                        <h3 style="font-size: 15px; color: black">Por favor espere...</h3>
+                        <p:graphicImage value="../../Images/loader.gif" style="height: 150px; width: 200px"></p:graphicImage>
+                    </p:blockUI>
+                    <p:panel id="pnlBuscar">
+                        <p:toolbar>
+                            <f:facet name="left">
+                                <p:commandButton style="background-color: #045491; color: #FFFFFF; font-size: 17px" 
+                                                 id="buscar" oncomplete="PF('dlgFactura').show()" 
+                                                 update="frmBuscar,:frmPrincipal"  value="AGREGAR AVISO">
+                                </p:commandButton>
+                            </f:facet>
+                        </p:toolbar>                          
+                    </p:panel>
+                </h:form>
+                <!--Formulario para buscar número de referencia-->
+                <!--Formulario para ingresar datos de la factura-->
+                <h:form id="frmFactura" style="font-size: 12px">
+                    <p:dialog id="dlgFact" widgetVar="dlgFactura" header="Agregar aviso para correo electrónico"
+                              showEffect="clip" hideEffect="explode"  resizable="false" responsive="true">                       
+                        <p:panel id="pnlFact">
+                            <p:panelGrid id="pnlFactura" columns="2" style="margin: 0 auto">
+                                <p:outputLabel value="Aviso"></p:outputLabel>
+                                <p:inputTextarea id="c" style="width: 300px;" value="#{mensajeBean.mensaje.avisoCorreo}" label="" placeholder="" required="true"></p:inputTextarea>               
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:spacer width="400" height="5"></p:spacer>
+                        <p:commandButton id="track" 
+                                         style="height: 35px; width: 35px; background-image: url('../Images/save.png') !important;background-size: 35px; background-repeat: no-repeat"  
+                                         value="" 
+                                         onclick="PF('dlgInfo').show()" 
+                                         update="frmBuscar:mensaje,frmPrincipal,frmFactura:c" 
+                                         oncomplete="PF('dlgFactura').hide()"  
+                                         actionListener="#{mensajeBean.insertarMensaje()}" 
+                                         >
+                        </p:commandButton>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario para ingresar datos de la factura-->
+
+                <!--Formulario principal-->
+                <h:form id="frmPrincipal">
+                    <p:panel id="pnlPrincipal" header="" style="margin: 0 auto; text-align: justify; font-size: 13px">
+                        <p:layoutUnit id="tablaPrincipal" position="center" style="padding: 5px; text-align: center;">
+                            <p:dataTable id="tblPrincipal" paginator="true" rows="13" sortMode="multiple" paginatorPosition="top" var="tbl" value="#{mensajeBean.listaMensaje}">                           
+                                <p:column width="5%" headerText="ID">
+                                    <h:outputText value="#{tbl.id}"></h:outputText>
+                                </p:column>
+                                <p:column width="85%" headerText="Mensaje aviso correo">
+                                    <h:outputText value="#{tbl.avisoCorreo}"></h:outputText>
+                                </p:column>
+                                <p:column width="10%">                                 
+                                    <p:commandButton value="Borrar" 
+                                                     style="background-color: #045491; color: #FFFFFF; font-size: 17px"
+                                                     oncomplete="PF('dialogEliminarMensaje').show()" update="frmEliminarMensaje">
+                                        <f:setPropertyActionListener target="#{mensajeBean.mensaje}" value="#{tbl}"></f:setPropertyActionListener>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>                      
+                        </p:layoutUnit>                    
+                    </p:panel>                
+                </h:form>
+                <!--Formulario principal-->
+
+                <!--Formulario eliminar-->
+                <h:form id="frmEliminarMensaje">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog id="dlgEliminarUsuario" header="Eliminar mensaje" widgetVar="dialogEliminarMensaje" resizable="false" showEffect="clip" hideEffect="clip" modal="true">
+                        <h:outputText style="color: #E60013; font-size: 17px" value="¿Desea eliminar este registro?   "/><br></br><br></br>
+                        <p:commandButton value="NO" 
+                                         style="background-color: #036FAB; color: #FFFFFF; font-size: 17px"
+                                         oncomplete="PF('dialogEliminarMensaje').hide();"/>
+                        <p:spacer height="10" width="100"/>
+                        <p:commandButton value="SI" style="background-color: #E60013; color: #FFFFFF; font-size: 17px"
+                                         actionListener="#{mensajeBean.borrarMensaje()}" 
+                                         update="frmPrincipal, mensaje" 
+                                         oncomplete="PF('dialogEliminarMensaje').hide();"/>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario eliminar-->
+
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

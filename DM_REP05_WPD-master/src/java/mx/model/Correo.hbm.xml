@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 4/02/2022 10:16:04 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="PortalProvNac" name="mx.model.Correo" optimistic-lock="version" schema="dbo" table="CORREO">
+    <id name="id" type="int">
+      <column name="ID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="correo" type="string">
+      <column length="50" name="CORREO" not-null="true"/>
+    </property>
+    <property name="tipo" type="string">
+      <column length="50" name="TIPO"/>
+    </property>
+    <property name="pass" type="string">
+      <column length="50" name="PASS"/>
+    </property>
+  </class>
+</hibernate-mapping>

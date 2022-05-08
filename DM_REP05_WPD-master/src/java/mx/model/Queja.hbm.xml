@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2020 01:37:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.model.Queja" table="QUEJA" schema="dbo" catalog="PortalProvNac" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="rfc" type="string">
+            <column name="RFC" length="50" />
+        </property>
+        <property name="comentarioprov" type="string">
+            <column name="COMENTARIOPROV" length="500" />
+        </property>
+        <property name="feccomentario" type="timestamp">
+            <column name="FECCOMENTARIO" length="23" />
+        </property>
+        <property name="comentario" type="string">
+            <column name="COMENTARIO" length="500" />
+        </property>
+        <property name="feccomenresp" type="timestamp">
+            <column name="FECCOMENRESP" length="23" />
+        </property>
+    </class>
+</hibernate-mapping>

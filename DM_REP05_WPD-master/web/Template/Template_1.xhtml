@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/default.css"/>
+        <h:outputStylesheet name="css/cssLayout.css"/>
+        <link href="../resources/css/nenu.css" rel="stylesheet" type="text/css"/>
+        <title>PORTAL PROVEEDORES</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <h1>
+<!--                <h:graphicImage  url="/Images/logoduche.png" width="5%" height="5%" style=" border-radius: 15px;"/>
+                <br></br>-->
+                PORTAL PROVEEDORES
+            </h1>
+            <div id="menuPrincipal">
+                <h:form>
+                    <nav class="dropdownmenu">
+                        <ul>
+                            <li>
+                                <h:outputLink value="UploadInvoice.duche">
+                                    HOME 
+                                </h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink value="UploadInvoice.duche">
+                                    SUBIR FACTURA
+                                </h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink value="UploadComInvoice.duche">
+                                    SUBIR COMPLEMENTO DE PAGO
+                                </h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink value="Suggestion.duche">
+                                    SUGERENCIAS  
+                                </h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink value="UpdateDepositInformation.duche">
+                                    DEPÓSITO
+                                </h:outputLink>
+                            </li>
+                            <li><a href="#">ADMINISTRACIÓN DESAMEX</a>
+                                <ul id="submenu">
+                                    <li>
+                                        <h:outputLink value="UploadDucheInvoice.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}" >
+                                            FACTURAS
+                                        </h:outputLink>
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="ManageInfo.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}">
+                                            BUSCAR FACTURA PROVEEDOR
+                                        </h:outputLink>
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="ManageInfoLista.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}">
+                                            LISTAR FACTURA DESAMEX 
+                                        </h:outputLink>
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="ManageInfoDuche.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}">
+                                            BUSCAR FACTURA DESAMEX
+                                        </h:outputLink>
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="ManageInfoDucheLista.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}">
+                                            LISTA FACTURAS
+                                        </h:outputLink>
+                                    </li>
+                                     <li>
+                                        <h:outputLink value="PayDays.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}" >
+                                            DIAS DE PAGO
+                                        </h:outputLink>
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="User.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}">
+                                            USUARIOS
+                                        </h:outputLink>
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="RFC.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}">
+                                            RESPONSABLE RFC
+                                        </h:outputLink>
+                                    </li>
+                                    <li><h:outputLink value="Comment.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}">
+                                            MENSAJE
+                                        </h:outputLink>
+                                    </li>
+                                    <li><h:outputLink value="Info.duche" disabled="#{loginBean.usuario.codperfil eq 'Usuario'}">
+                                            SUBIR AVISO
+                                        </h:outputLink>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+
+                        <!--                    <p:menubar>
+                                            <p:submenu label="Inicio" icon="ui-icon-home">                             
+                                                <p:menuitem value="Inicio" outcome="/Views/UploadInvoice" icon="ui-icon-home"/>
+                                                <p:menuitem value="Cerrar sesión" icon="ui-icon-circle-close" action="/index?faces-redirect=true" 
+                                                            actionListener="{loginBean.cerrarSesion()}" />
+                                            </p:submenu>  
+                                            <p:submenu label="Facturas" icon="ui-icon-document">
+                                                <p:menuitem value="Subir facturas" outcome="/Views/UploadInvoice"  icon="ui-icon-search"/>                                            
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario'}" value="Facturas Duché" 
+                                                            outcome="/Views/UploadDucheInvoice"  icon="ui-icon-search"/>                                            
+                                            </p:submenu>
+                                            <p:submenu label="Sugerencias" icon="ui-icon-wrench">
+                                                <p:menuitem value="Dejar sugerencia" outcome="/Views/Suggestion"  icon="ui-icon-plus"/>                                            
+                                            </p:submenu>
+                                            <p:submenu label="Depósito" icon="ui-icon-wrench">
+                                                <p:menuitem value="Actualizar información" outcome="/Views/UpdateDepositInformation"  icon="ui-icon-plus"/>                                            
+                                            </p:submenu>
+                                            <p:submenu label="Manual" icon="ui-icon-wrench">
+                                                <p:menuitem value="Manual de usuario" oncomplete="PF('dialogVerManual').show()"  icon="ui-icon-plus"/>                                            
+                                            </p:submenu>
+                                            <p:submenu  label="Administrar" icon="ui-icon-wrench">
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario'}" value="Buscar Fact. Prov." outcome="/Views/ManageInfo" icon="ui-icon-search"/>
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario'}" value="Lista Fact. Prov." outcome="/Views/ManageInfoLista" icon="ui-icon-search"/>
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario'}" value="Buscar Fact. Duché" outcome="/Views/ManageInfoDuche" icon="ui-icon-search"/>
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario'}" value="Lista Fact. Duché" outcome="/Views/ManageInfoDucheLista" icon="ui-icon-search"/>
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario' || loginBean.usuario.codperfil eq 'Administrador'}" value="Usuarios" outcome="/Views/User" icon="ui-icon-search"/>
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario'}" value="Responsable RFC" outcome="/Views/RFC" icon="ui-icon-plus"/>
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario' || loginBean.usuario.codperfil eq 'Administrador'}" value="Mensaje" outcome="/Views/Comment" icon="ui-icon-plus"/>
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario' || loginBean.usuario.codperfil eq 'Administrador'}" value="Días pago" outcome="/Views/PayDays" icon="ui-icon-plus"/>
+                                                <p:menuitem disabled="{loginBean.usuario.codperfil eq 'Usuario' || loginBean.usuario.codperfil eq 'Administrador'}" value="Subir aviso" outcome="/Views/Info" icon="ui-icon-plus"/>
+                                            </p:submenu>
+                                            </p:menubar>-->
+                    </nav>
+
+                </h:form>
+            </div>
+            <ui:insert name="top">
+
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+
+        </div>
+
+<!--        <div id="bottom">
+            <ui:insert name="bottom">&copy; 2019-DERECHOS RESERVADOS-DECORADOS Y SATINADOS MEXICANOS S.A DE C.V..</ui:insert>
+        </div>-->
+
+    </h:body>
+
+
+
+</html>

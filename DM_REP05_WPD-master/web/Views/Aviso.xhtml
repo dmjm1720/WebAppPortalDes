@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <link href="../resources/css/imagenes.css" rel="stylesheet" type="text/css"/>
+    <body>
+        <ui:composition template="./../Template/TemplateAviso.xhtml">
+            <ui:define name="content">
+                <h1>PORTAL PROVEEDORES DESAMEX</h1>
+                <h1>AVISOS</h1>
+
+                <br></br>
+                <!--Formulario para buscar número de referencia-->
+
+
+                <!--Formulario para ver PDF-->
+                <h:form id="frmVer">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgVer" header="" 
+                              widgetVar="dialogVerPDF" resizable="false" 
+                              showEffect="clip" hideEffect="clip" modal="false"
+                              closable="false" closeOnEscape="true"
+                              minimizable="false" maximizable="false">
+                        <p:spacer width="760" height="10" /><p:button outcome="FacturaProveedores.desamex" value="IR A MENÚ PRINCIPAL" style="font-size: 15px; background-color: #1D60A4; color: #FFFFFF;"/>
+                        <p:separator />
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <object type="application/pdf" data="#{avisosBean.aviso}" height="650px" width="900px" internalinstanceid="5">
+                                Your browser can't display pdf, <a href="#{avisosBean.aviso}">click</a> to download pdf instead.
+                            </object> 
+                        </p:panelGrid>
+
+                    </p:dialog>
+                </h:form>
+                <!--Formulario para ver PDF-->
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

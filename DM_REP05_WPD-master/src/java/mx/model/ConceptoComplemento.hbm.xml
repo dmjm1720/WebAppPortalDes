@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2020 01:37:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.model.ConceptoComplemento" table="CONCEPTO_COMPLEMENTO" schema="dbo" catalog="PortalProvNac" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="1000" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="UUID" length="200" />
+        </property>
+        <property name="precioUnitario" type="big_decimal">
+            <column name="PRECIO_UNITARIO" scale="4" />
+        </property>
+        <property name="cantidad" type="string">
+            <column name="CANTIDAD" length="50" />
+        </property>
+        <property name="unidad" type="string">
+            <column name="UNIDAD" length="50" />
+        </property>
+        <property name="claveUnidad" type="string">
+            <column name="CLAVE_UNIDAD" length="50" />
+        </property>
+        <property name="importe" type="big_decimal">
+            <column name="IMPORTE" scale="4" />
+        </property>
+        <property name="claveProd" type="string">
+            <column name="CLAVE_PROD" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

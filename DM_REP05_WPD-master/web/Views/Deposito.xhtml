@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template/Template.xhtml">
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="900000" />
+                <p:dialog style="font-size: 15px;" header="DECORADOS Y SATINADOS MEXICANOS S.A DE C.V." widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="1280" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png"  alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 20px; font-weight: bold " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+                <!--Formulario para buscar número de referencia-->
+                <h:form>
+                    <table border="0">
+                        <tbody>
+                            <tr>
+                                <td><p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value="| Sesión iniciada: #{loginBean.usuario.correo} | RFC: #{loginBean.usuario.rfc} |"/></td>
+                                <td width="20px"></td>
+                                <td> <label style="color: #FFFFFF !important; font-size: 14px">Cerrar sesión</label></td>
+                                <td>                  
+                                    <p:commandLink id="salir" 
+                                                   title="CERRAR SESIÓN"
+                                                   action="/index?faces-redirect=true" 
+                                                   actionListener="#{loginBean.cerrarSesion()}">
+                                        <h:graphicImage url="../img/exit.png" style="height: 35px"/> 
+                                    </p:commandLink>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </h:form>
+                <h:form id="frmBuscar">
+
+                    <p:growl id="mensaje" showSummary="true" life="50000" showDetail="true"></p:growl>
+                    <p:blockUI block="pnlBuscar" trigger="buscar">   
+                        <h3 style="font-size: 15px; color: black">Por favor espere...</h3>
+                        <p:graphicImage value="../Images/loader.gif" style="height: 150px; width: 200px"></p:graphicImage>
+                    </p:blockUI>
+                    <p:panel id="pnlBuscar">
+                        <p:toolbar>
+                            <f:facet name="left">
+                                <label>ENVIAR ACTUALIZACIÓN DE DEPÓSITO </label>&nbsp;
+                                <p:commandButton style="font-size: 13px; height: 50px; width: 50px; background-image: url('../Images/actualizacion.png') !important;background-size: 50px; background-repeat: no-repeat" 
+                                                 id="buscar" oncomplete="PF('dlgPDF').show()" 
+                                                 update="frmBuscar"  value="">
+                                </p:commandButton>
+                            </f:facet>
+                        </p:toolbar>                          
+                    </p:panel>
+                </h:form>
+                <!--Formulario para buscar número de referencia-->
+
+                <!--Formulario para subir PDF-->
+                <h:form id="frmPDF" enctype="multipart/form-data">                    
+                    <p:dialog style="font-size: 12px;" header="Subir actualización de depósito en formato PDF" widgetVar="dlgPDF" 
+                              showEffect="slide" 
+                              hideEffect="clip"  
+                              height="400" resizable="false" closable="true" modal="true">
+                        <p:growl id="mensajes" life="10000" showSummary="true" showDetail="true"></p:growl>                       
+                        <p:panel id="Pnlsubir">
+                            <p:panelGrid columns="2" style="margin: 0 auto">                             
+
+                                <p:outputLabel for="banco" value="Banco"></p:outputLabel>
+                                <p:inputText id="banco" style="width: 250px;" placeholder="Ingresa nombre del Banco" required="true" requiredMessage="Ingresa nombre del Banco" value="#{depositoBean.deposito.banco}">
+                                    <p:message for="banco"></p:message>
+                                </p:inputText>
+
+                                <p:outputLabel for="cuenta" value="No. de Cuenta"></p:outputLabel>
+                                <p:inputText id="cuenta" style="width: 250px" placeholder="Ingresa número de cuenta" required="true" requiredMessage="Ingresa número de cuenta" value="#{depositoBean.deposito.nocuenta}">
+                                    <p:message for="cuenta"></p:message>
+                                </p:inputText>
+
+                                <p:outputLabel for="clabe" value="CLABE"></p:outputLabel>
+                                <p:inputText id="clabe" style="width: 250px" placeholder="Ingresa CLABE" required="true" requiredMessage="Ingresa CLABE" value="#{depositoBean.deposito.clabe}">
+                                    <p:message for="clabe"></p:message>
+                                </p:inputText>
+
+                                <p:outputLabel for="titular" value="Titular"></p:outputLabel>
+                                <p:inputText id="titular" style="width: 250px" placeholder="Ingresa nombre del titular" required="true" requiredMessage="Ingresa nombre del titular" value="#{depositoBean.deposito.titular}">
+                                    <p:message for="titular"></p:message>
+                                </p:inputText>
+
+                                <p:outputLabel for="solicitante" value="Solicitante"></p:outputLabel>
+                                <p:inputText id="solicitante" style="width: 250px" placeholder="Ingresa el nombre del solicitante" required="true" requiredMessage="Ingresa el nombre del solicitante" value="#{depositoBean.deposito.solicitante}">
+                                    <p:message for="solicitante"></p:message>
+                                </p:inputText>
+
+                                <p:outputLabel for="correo" value="Correo"></p:outputLabel>
+                                <p:inputText id="correo" style="width: 250px;" validatorMessage="Correo inválido" value="#{depositoBean.deposito.correo}"
+                                             required="true" requiredMessage="Ingrese e-mail" label="Ingrese e-mail" placeholder="Ingrese su e-mail">
+                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" ></f:validateRegex>
+                                    <p:message for="correo"></p:message>
+                                </p:inputText>
+
+                                <p:outputLabel for="pdf" value="Buscar en mi PC el archivo de depósito"></p:outputLabel>
+                                <p:fileUpload id="pdf" auto="false" 
+                                              value="#{depositoBean.file}"
+                                              invalidFileMessage="Archivos permitidos PDF"                                                  
+                                              allowTypes="/(\.|\/)(pdf)$/" 
+                                              multiple="false" 
+                                              mode="simple" 
+                                              update="mensajes" 
+                                              required="true"
+                                              sizeLimit="9000000"
+                                              skinSimple="true">
+                                    <p:message for="pdf"></p:message>
+                                </p:fileUpload>
+
+                                <p:outputLabel></p:outputLabel>
+                                <p:commandButton id="subir" style="height: 30px; width: 150px;" ajax="false" update="mensajes" 
+                                                 value="Enviar información" onclick="PF('dlgInfo').show()" 
+                                                 actionListener="#{depositoBean.subirPDF}">
+                                </p:commandButton>      
+                            </p:panelGrid>
+                        </p:panel>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario para subir PDF-->
+
+                <!--Formulario del diálogo-->
+                <h:form>
+                    <p:dialog style="font-size: 12px;"  widgetVar="dlgInfo" 
+                              showEffect="slide" 
+                              hideEffect="clip"  
+                              height="300" closable="false" resizable="false" modal="true">  
+                        <h3 style="font-size: 15px; color: black">Enviando su actualización, por favor espere...</h3>
+                        <p:spacer width="35px"></p:spacer><p:graphicImage value="../Images/enviarcorreo.gif" style="height: 250px; width: 250px"></p:graphicImage>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario del diálogo-->
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

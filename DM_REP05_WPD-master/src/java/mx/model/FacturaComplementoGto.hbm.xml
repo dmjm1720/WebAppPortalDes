@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2020 01:37:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.model.FacturaComplementoGto" table="FACTURA_COMPLEMENTO_GTO" schema="dbo" catalog="PortalProvNac" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="factura" type="string">
+            <column name="FACTURA" length="50" />
+        </property>
+        <property name="fecha" type="string">
+            <column name="FECHA" length="50" />
+        </property>
+        <property name="folio" type="string">
+            <column name="FOLIO" length="50" />
+        </property>
+        <property name="serie" type="string">
+            <column name="SERIE" length="50" />
+        </property>
+        <property name="versioncfdi" type="string">
+            <column name="VERSIONCFDI" length="10" />
+        </property>
+        <property name="importe" type="big_decimal">
+            <column name="IMPORTE" scale="4" />
+        </property>
+        <property name="total" type="big_decimal">
+            <column name="TOTAL" scale="4" />
+        </property>
+        <property name="tipoCambio" type="big_decimal">
+            <column name="TIPO_CAMBIO" scale="4" />
+        </property>
+        <property name="moneda" type="string">
+            <column name="MONEDA" length="20" />
+        </property>
+        <property name="metodoPago" type="string">
+            <column name="METODO_PAGO" length="50" />
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="TIPO_COMPROBANTE" length="50" />
+        </property>
+        <property name="lugarExpedicion" type="string">
+            <column name="LUGAR_EXPEDICION" length="450" />
+        </property>
+        <property name="certificado" type="string">
+            <column name="CERTIFICADO" />
+        </property>
+        <property name="noCertificado" type="string">
+            <column name="NO_CERTIFICADO" length="50" />
+        </property>
+        <property name="formaPago" type="string">
+            <column name="FORMA_PAGO" length="150" />
+        </property>
+        <property name="sello" type="string">
+            <column name="SELLO" length="500" />
+        </property>
+        <property name="nombreE" type="string">
+            <column name="NOMBRE_E" length="200" />
+        </property>
+        <property name="rfcE" type="string">
+            <column name="RFC_E" length="200" />
+        </property>
+        <property name="regimenFiscal" type="string">
+            <column name="REGIMEN_FISCAL" length="200" />
+        </property>
+        <property name="nombreR" type="string">
+            <column name="NOMBRE_R" length="200" />
+        </property>
+        <property name="rfcR" type="string">
+            <column name="RFC_R" length="200" />
+        </property>
+        <property name="usoCfdi" type="string">
+            <column name="USO_CFDI" length="200" />
+        </property>
+        <property name="impuesto" type="string">
+            <column name="IMPUESTO" length="20" />
+        </property>
+        <property name="tipoFactor" type="string">
+            <column name="TIPO_FACTOR" length="20" />
+        </property>
+        <property name="tasaCouta" type="string">
+            <column name="TASA_COUTA" length="20" />
+        </property>
+        <property name="importeCouta" type="big_decimal">
+            <column name="IMPORTE_COUTA" scale="4" />
+        </property>
+        <property name="referencia" type="string">
+            <column name="REFERENCIA" length="50" />
+        </property>
+        <property name="fechaRecepcion" type="string">
+            <column name="FECHA_RECEPCION" length="50" />
+        </property>
+        <property name="fechaPago" type="string">
+            <column name="FECHA_PAGO" length="50" />
+        </property>
+        <property name="estatus" type="string">
+            <column name="ESTATUS" length="50" />
+        </property>
+        <property name="calle" type="string">
+            <column name="CALLE" length="500" />
+        </property>
+        <property name="colonia" type="string">
+            <column name="COLONIA" length="500" />
+        </property>
+        <property name="estado" type="string">
+            <column name="ESTADO" length="500" />
+        </property>
+        <property name="municipio" type="string">
+            <column name="MUNICIPIO" length="500" />
+        </property>
+        <property name="pais" type="string">
+            <column name="PAIS" length="500" />
+        </property>
+        <property name="comentario" type="string">
+            <column name="COMENTARIO" length="500" />
+        </property>
+        <property name="comentarioProveedor" type="string">
+            <column name="COMENTARIO_PROVEEDOR" length="500" />
+        </property>
+        <property name="estatusSat" type="string">
+            <column name="ESTATUS_SAT" length="100" />
+        </property>
+        <property name="versioncfd" type="string">
+            <column name="VERSIONCFD" length="10" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="UUID" length="200" />
+        </property>
+        <property name="fechaTimbrado" type="string">
+            <column name="FECHA_TIMBRADO" length="50" />
+        </property>
+        <property name="rfcProvCert" type="string">
+            <column name="RFC_PROV_CERT" length="200" />
+        </property>
+        <property name="selloCfd" type="string">
+            <column name="SELLO_CFD" length="500" />
+        </property>
+        <property name="selloSat" type="string">
+            <column name="SELLO_SAT" length="500" />
+        </property>
+        <property name="wcxp" type="string">
+            <column name="WCXP" length="50" />
+        </property>
+        <property name="enviado" type="string">
+            <column name="ENVIADO" length="2" />
+        </property>
+        <property name="foliowcxp" type="java.lang.Integer">
+            <column name="FOLIOWCXP" />
+        </property>
+        <property name="claveProv" type="string">
+            <column name="CLAVE_PROV" length="50" />
+        </property>
+        <property name="nombreArchivo" type="string">
+            <column name="NOMBRE_ARCHIVO" length="250" />
+        </property>
+        <property name="noCertificadoSat" type="string">
+            <column name="NO_CERTIFICADO_SAT" length="50" />
+        </property>
+        <property name="condicionesPago" type="string">
+            <column name="CONDICIONES_PAGO" length="1000" />
+        </property>
+    </class>
+</hibernate-mapping>

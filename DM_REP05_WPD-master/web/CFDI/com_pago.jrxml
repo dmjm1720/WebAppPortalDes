@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="com_pago" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c2fd0ae2-a3ab-431c-bee1-d0353bab371e">
+	<property name="ireport.zoom" value="1.8660295208389333"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="423"/>
+	<parameter name="uuid" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     FACTURA_COMPLEMENTO."ID" AS FACTURA_COMPLEMENTO_ID,
+     FACTURA_COMPLEMENTO."FACTURA" AS FACTURA_COMPLEMENTO_FACTURA,
+     FACTURA_COMPLEMENTO."FECHA" AS FACTURA_COMPLEMENTO_FECHA,
+     FACTURA_COMPLEMENTO."FOLIO" AS FACTURA_COMPLEMENTO_FOLIO,
+     FACTURA_COMPLEMENTO."SERIE" AS FACTURA_COMPLEMENTO_SERIE,
+     FACTURA_COMPLEMENTO."VERSIONCFDI" AS FACTURA_COMPLEMENTO_VERSIONCFDI,
+     FACTURA_COMPLEMENTO."IMPORTE" AS FACTURA_COMPLEMENTO_IMPORTE,
+     FACTURA_COMPLEMENTO."TOTAL" AS FACTURA_COMPLEMENTO_TOTAL,
+     FACTURA_COMPLEMENTO."TIPO_CAMBIO" AS FACTURA_COMPLEMENTO_TIPO_CAMBIO,
+     FACTURA_COMPLEMENTO."MONEDA" AS FACTURA_COMPLEMENTO_MONEDA,
+     FACTURA_COMPLEMENTO."METODO_PAGO" AS FACTURA_COMPLEMENTO_METODO_PAGO,
+     FACTURA_COMPLEMENTO."TIPO_COMPROBANTE" AS FACTURA_COMPLEMENTO_TIPO_COMPROBANTE,
+     FACTURA_COMPLEMENTO."LUGAR_EXPEDICION" AS FACTURA_COMPLEMENTO_LUGAR_EXPEDICION,
+     FACTURA_COMPLEMENTO."CERTIFICADO" AS FACTURA_COMPLEMENTO_CERTIFICADO,
+     FACTURA_COMPLEMENTO."NO_CERTIFICADO" AS FACTURA_COMPLEMENTO_NO_CERTIFICADO,
+     FACTURA_COMPLEMENTO."FORMA_PAGO" AS FACTURA_COMPLEMENTO_FORMA_PAGO,
+     FACTURA_COMPLEMENTO."SELLO" AS FACTURA_COMPLEMENTO_SELLO,
+     FACTURA_COMPLEMENTO."NOMBRE_E" AS FACTURA_COMPLEMENTO_NOMBRE_E,
+     FACTURA_COMPLEMENTO."RFC_E" AS FACTURA_COMPLEMENTO_RFC_E,
+     FACTURA_COMPLEMENTO."REGIMEN_FISCAL" AS FACTURA_COMPLEMENTO_REGIMEN_FISCAL,
+     FACTURA_COMPLEMENTO."NOMBRE_R" AS FACTURA_COMPLEMENTO_NOMBRE_R,
+     FACTURA_COMPLEMENTO."RFC_R" AS FACTURA_COMPLEMENTO_RFC_R,
+     FACTURA_COMPLEMENTO."USO_CFDI" AS FACTURA_COMPLEMENTO_USO_CFDI,
+     FACTURA_COMPLEMENTO."IMPUESTO" AS FACTURA_COMPLEMENTO_IMPUESTO,
+     FACTURA_COMPLEMENTO."TIPO_FACTOR" AS FACTURA_COMPLEMENTO_TIPO_FACTOR,
+     FACTURA_COMPLEMENTO."TASA_COUTA" AS FACTURA_COMPLEMENTO_TASA_COUTA,
+     FACTURA_COMPLEMENTO."IMPORTE_COUTA" AS FACTURA_COMPLEMENTO_IMPORTE_COUTA,
+     FACTURA_COMPLEMENTO."REFERENCIA" AS FACTURA_COMPLEMENTO_REFERENCIA,
+     FACTURA_COMPLEMENTO."FECHA_RECEPCION" AS FACTURA_COMPLEMENTO_FECHA_RECEPCION,
+     FACTURA_COMPLEMENTO."FECHA_PAGO" AS FACTURA_COMPLEMENTO_FECHA_PAGO,
+     FACTURA_COMPLEMENTO."ESTATUS" AS FACTURA_COMPLEMENTO_ESTATUS,
+     FACTURA_COMPLEMENTO."CALLE" AS FACTURA_COMPLEMENTO_CALLE,
+     FACTURA_COMPLEMENTO."COLONIA" AS FACTURA_COMPLEMENTO_COLONIA,
+     FACTURA_COMPLEMENTO."ESTADO" AS FACTURA_COMPLEMENTO_ESTADO,
+     FACTURA_COMPLEMENTO."MUNICIPIO" AS FACTURA_COMPLEMENTO_MUNICIPIO,
+     FACTURA_COMPLEMENTO."PAIS" AS FACTURA_COMPLEMENTO_PAIS,
+     FACTURA_COMPLEMENTO."COMENTARIO" AS FACTURA_COMPLEMENTO_COMENTARIO,
+     FACTURA_COMPLEMENTO."COMENTARIO_PROVEEDOR" AS FACTURA_COMPLEMENTO_COMENTARIO_PROVEEDOR,
+     FACTURA_COMPLEMENTO."ESTATUS_SAT" AS FACTURA_COMPLEMENTO_ESTATUS_SAT,
+     FACTURA_COMPLEMENTO."VERSIONCFD" AS FACTURA_COMPLEMENTO_VERSIONCFD,
+     FACTURA_COMPLEMENTO."UUID" AS FACTURA_COMPLEMENTO_UUID,
+     FACTURA_COMPLEMENTO."FECHA_TIMBRADO" AS FACTURA_COMPLEMENTO_FECHA_TIMBRADO,
+     FACTURA_COMPLEMENTO."RFC_PROV_CERT" AS FACTURA_COMPLEMENTO_RFC_PROV_CERT,
+     FACTURA_COMPLEMENTO."SELLO_CFD" AS FACTURA_COMPLEMENTO_SELLO_CFD,
+     FACTURA_COMPLEMENTO."SELLO_SAT" AS FACTURA_COMPLEMENTO_SELLO_SAT,
+     FACTURA_COMPLEMENTO."WCXP" AS FACTURA_COMPLEMENTO_WCXP,
+     FACTURA_COMPLEMENTO."ENVIADO" AS FACTURA_COMPLEMENTO_ENVIADO,
+     FACTURA_COMPLEMENTO."FOLIOWCXP" AS FACTURA_COMPLEMENTO_FOLIOWCXP,
+     FACTURA_COMPLEMENTO."CLAVE_PROV" AS FACTURA_COMPLEMENTO_CLAVE_PROV,
+     FACTURA_COMPLEMENTO."NOMBRE_ARCHIVO" AS FACTURA_COMPLEMENTO_NOMBRE_ARCHIVO,
+     FACTURA_COMPLEMENTO."NO_CERTIFICADO_SAT" AS FACTURA_COMPLEMENTO_NO_CERTIFICADO_SAT,
+     FACTURA_COMPLEMENTO."CONDICIONES_PAGO" AS FACTURA_COMPLEMENTO_CONDICIONES_PAGO,
+     PAGO."ID" AS PAGO_ID,
+     PAGO."FECHAPAGO" AS PAGO_FECHAPAGO,
+     PAGO."FORMADEPAGO" AS PAGO_FORMADEPAGO,
+     PAGO."MONEDAPAGO" AS PAGO_MONEDAPAGO,
+     PAGO."MONTO" AS PAGO_MONTO,
+     PAGO."NUMOPERACION" AS PAGO_NUMOPERACION,
+     PAGO."RFCEMISORCTABEN" AS PAGO_RFCEMISORCTABEN,
+     PAGO."CTABENEFICIARIO" AS PAGO_CTABENEFICIARIO,
+     PAGO."UUID" AS PAGO_UUID,
+     CONCEPTO_COMPLEMENTO."ID" AS CONCEPTO_COMPLEMENTO_ID,
+     CONCEPTO_COMPLEMENTO."DESCRIPCION" AS CONCEPTO_COMPLEMENTO_DESCRIPCION,
+     CONCEPTO_COMPLEMENTO."UUID" AS CONCEPTO_COMPLEMENTO_UUID,
+     CONCEPTO_COMPLEMENTO."PRECIO_UNITARIO" AS CONCEPTO_COMPLEMENTO_PRECIO_UNITARIO,
+     CONCEPTO_COMPLEMENTO."CANTIDAD" AS CONCEPTO_COMPLEMENTO_CANTIDAD,
+     CONCEPTO_COMPLEMENTO."UNIDAD" AS CONCEPTO_COMPLEMENTO_UNIDAD,
+     CONCEPTO_COMPLEMENTO."CLAVE_UNIDAD" AS CONCEPTO_COMPLEMENTO_CLAVE_UNIDAD,
+     CONCEPTO_COMPLEMENTO."IMPORTE" AS CONCEPTO_COMPLEMENTO_IMPORTE,
+     CONCEPTO_COMPLEMENTO."CLAVE_PROD" AS CONCEPTO_COMPLEMENTO_CLAVE_PROD,
+     CONCEPTO_PAGOS_COMP."ID" AS CONCEPTO_PAGOS_COMP_ID,
+     CONCEPTO_PAGOS_COMP."IDDOCUMENTO" AS CONCEPTO_PAGOS_COMP_IDDOCUMENTO,
+     CONCEPTO_PAGOS_COMP."SERIE" AS CONCEPTO_PAGOS_COMP_SERIE,
+     CONCEPTO_PAGOS_COMP."FOLIO" AS CONCEPTO_PAGOS_COMP_FOLIO,
+     CONCEPTO_PAGOS_COMP."MONEDADR" AS CONCEPTO_PAGOS_COMP_MONEDADR,
+     CONCEPTO_PAGOS_COMP."METODODEPAGODR" AS CONCEPTO_PAGOS_COMP_METODODEPAGODR,
+     CONCEPTO_PAGOS_COMP."NUMPARCIALIDAD" AS CONCEPTO_PAGOS_COMP_NUMPARCIALIDAD,
+     CONCEPTO_PAGOS_COMP."IMPSALDOANT" AS CONCEPTO_PAGOS_COMP_IMPSALDOANT,
+     CONCEPTO_PAGOS_COMP."IMPPAGADO" AS CONCEPTO_PAGOS_COMP_IMPPAGADO,
+     CONCEPTO_PAGOS_COMP."IMPSALDOINSOLUTO" AS CONCEPTO_PAGOS_COMP_IMPSALDOINSOLUTO,
+     CONCEPTO_PAGOS_COMP."FACTURA" AS CONCEPTO_PAGOS_COMP_FACTURA
+FROM
+     "dbo"."FACTURA_COMPLEMENTO" FACTURA_COMPLEMENTO INNER JOIN "dbo"."PAGO" PAGO ON FACTURA_COMPLEMENTO."UUID" = PAGO."UUID"
+     INNER JOIN "dbo"."CONCEPTO_COMPLEMENTO" CONCEPTO_COMPLEMENTO ON FACTURA_COMPLEMENTO."UUID" = CONCEPTO_COMPLEMENTO."UUID"
+     INNER JOIN "dbo"."CONCEPTO_PAGOS_COMP" CONCEPTO_PAGOS_COMP ON FACTURA_COMPLEMENTO."UUID" = CONCEPTO_PAGOS_COMP."FACTURA"
+WHERE FACTURA_COMPLEMENTO.UUID=$P{uuid}]]>
+	</queryString>
+	<field name="FACTURA_COMPLEMENTO_ID" class="java.lang.Integer"/>
+	<field name="FACTURA_COMPLEMENTO_FACTURA" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_FECHA" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_FOLIO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_SERIE" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_VERSIONCFDI" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_IMPORTE" class="java.math.BigDecimal"/>
+	<field name="FACTURA_COMPLEMENTO_TOTAL" class="java.math.BigDecimal"/>
+	<field name="FACTURA_COMPLEMENTO_TIPO_CAMBIO" class="java.math.BigDecimal"/>
+	<field name="FACTURA_COMPLEMENTO_MONEDA" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_METODO_PAGO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_TIPO_COMPROBANTE" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_LUGAR_EXPEDICION" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_CERTIFICADO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_NO_CERTIFICADO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_FORMA_PAGO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_SELLO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_NOMBRE_E" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_RFC_E" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_REGIMEN_FISCAL" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_NOMBRE_R" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_RFC_R" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_USO_CFDI" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_IMPUESTO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_TIPO_FACTOR" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_TASA_COUTA" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_IMPORTE_COUTA" class="java.math.BigDecimal"/>
+	<field name="FACTURA_COMPLEMENTO_REFERENCIA" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_FECHA_RECEPCION" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_FECHA_PAGO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_ESTATUS" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_CALLE" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_COLONIA" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_ESTADO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_MUNICIPIO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_PAIS" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_COMENTARIO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_COMENTARIO_PROVEEDOR" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_ESTATUS_SAT" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_VERSIONCFD" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_UUID" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_FECHA_TIMBRADO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_RFC_PROV_CERT" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_SELLO_CFD" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_SELLO_SAT" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_WCXP" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_ENVIADO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_FOLIOWCXP" class="java.lang.Integer"/>
+	<field name="FACTURA_COMPLEMENTO_CLAVE_PROV" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_NOMBRE_ARCHIVO" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_NO_CERTIFICADO_SAT" class="java.lang.String"/>
+	<field name="FACTURA_COMPLEMENTO_CONDICIONES_PAGO" class="java.lang.String"/>
+	<field name="PAGO_ID" class="java.lang.Integer"/>
+	<field name="PAGO_FECHAPAGO" class="java.lang.String"/>
+	<field name="PAGO_FORMADEPAGO" class="java.lang.String"/>
+	<field name="PAGO_MONEDAPAGO" class="java.lang.String"/>
+	<field name="PAGO_MONTO" class="java.math.BigDecimal"/>
+	<field name="PAGO_NUMOPERACION" class="java.lang.String"/>
+	<field name="PAGO_RFCEMISORCTABEN" class="java.lang.String"/>
+	<field name="PAGO_CTABENEFICIARIO" class="java.lang.String"/>
+	<field name="PAGO_UUID" class="java.lang.String"/>
+	<field name="CONCEPTO_COMPLEMENTO_ID" class="java.lang.Integer"/>
+	<field name="CONCEPTO_COMPLEMENTO_DESCRIPCION" class="java.lang.String"/>
+	<field name="CONCEPTO_COMPLEMENTO_UUID" class="java.lang.String"/>
+	<field name="CONCEPTO_COMPLEMENTO_PRECIO_UNITARIO" class="java.math.BigDecimal"/>
+	<field name="CONCEPTO_COMPLEMENTO_CANTIDAD" class="java.lang.String"/>
+	<field name="CONCEPTO_COMPLEMENTO_UNIDAD" class="java.lang.String"/>
+	<field name="CONCEPTO_COMPLEMENTO_CLAVE_UNIDAD" class="java.lang.String"/>
+	<field name="CONCEPTO_COMPLEMENTO_IMPORTE" class="java.math.BigDecimal"/>
+	<field name="CONCEPTO_COMPLEMENTO_CLAVE_PROD" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_ID" class="java.lang.Integer"/>
+	<field name="CONCEPTO_PAGOS_COMP_IDDOCUMENTO" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_SERIE" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_FOLIO" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_MONEDADR" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_METODODEPAGODR" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_NUMPARCIALIDAD" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_IMPSALDOANT" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_IMPPAGADO" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_IMPSALDOINSOLUTO" class="java.lang.String"/>
+	<field name="CONCEPTO_PAGOS_COMP_FACTURA" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="143" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="572" height="15" forecolor="#000000" backcolor="#0B2161" uuid="bc0c68c3-d8d6-4b0f-a6a5-6bbda6dbca0d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[COMPROBANTE DE PAGOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="421" y="25" width="49" height="15" backcolor="#CCCCCC" uuid="e484cb92-f8b8-4df9-b3f5-ea5d78385796"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serie:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="421" y="40" width="49" height="15" backcolor="#CCCCCC" uuid="768650fc-5347-4816-9cd7-6fc6efc1d2af"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="421" y="55" width="49" height="15" backcolor="#CCCCCC" uuid="f1dde8e6-953c-462d-a7f9-da132e9af177"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="86" width="91" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="516b3a62-aa76-4a99-bd80-7cddd608b4ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[RFC Receptor:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH.mm.ss" isBlankWhenNull="true">
+				<reportElement x="472" y="55" width="100" height="15" uuid="f1142fe6-0a05-4f60-a15c-02f5a6b62d7a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_FECHA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="472" y="40" width="100" height="15" uuid="7c5ccfb1-464e-49ca-8fed-2265e2cad1e1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_FOLIO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="472" y="25" width="100" height="15" uuid="a06bf5e1-743a-447e-a75f-b21f2c59808c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_SERIE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="91" y="86" width="174" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="7d19dbb3-4383-4cab-a1f2-f5997de45d25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="91" y="108" width="174" height="15" uuid="9253c695-4229-49bf-b6df-600055e8bbe2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_NOMBRE_R}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="108" width="91" height="15" uuid="a6b2865b-312d-4e17-b97f-80edc31d54e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_RFC_R}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="307" y="86" width="91" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="956c0840-4f05-4cfb-8560-680aa2e8bda7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[RFC Emisor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="398" y="86" width="174" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="38f7ef7b-30de-403c-8c7d-ddbd2f0a2b62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="398" y="109" width="174" height="15" uuid="e20b27c5-5085-4c16-a342-af954de0d2a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_NOMBRE_E}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="309" y="109" width="86" height="15" uuid="09fc0c25-92c7-4884-a403-ac0c5280a6e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_RFC_E}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="139" width="572" height="1" uuid="91796ecb-46fc-4102-9967-5eb3ae4787b4"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="82" width="265" height="1" uuid="4031c2e0-edaf-4092-bf5a-826e3e545f9c"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="103" width="265" height="1" uuid="31a2d731-ff76-48cd-a9a2-e659f1da397f"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="307" y="82" width="265" height="1" uuid="3bd939a7-7c1a-4921-b4ee-6070dcc5f06b"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="307" y="104" width="265" height="1" uuid="3c075a1f-7afc-4d3f-a44a-1bd8ab510789"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="0" width="89" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="65587b40-5b6e-4f44-9f38-95002f8b7a36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="176" y="0" width="89" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="b9c86633-1d5d-432d-a802-1861fb7e316a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Fecha aplicación]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="176" y="21" width="89" height="15" uuid="16857dea-5548-499a-94a6-79c318be5f3e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_FECHAPAGO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="21" width="89" height="15" uuid="7c099ffd-ce35-43e1-8611-a8d45d15db1e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_FORMADEPAGO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="265" y="0" width="100" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="8b6259c0-af79-403a-9d1d-cb0ca1a78973"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Importe:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="365" y="0" width="111" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="bd0bc26d-b47f-4012-be53-bffdff3977bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Moneda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="476" y="0" width="96" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="80589a49-a6cb-432c-8db4-cd8021b9b7eb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tipo de cambio]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="365" y="21" width="111" height="15" uuid="208d1445-0024-4333-b7b1-439add5fe437"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_MONEDAPAGO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="265" y="21" width="100" height="15" uuid="35f46f45-baa0-49c7-a1ba-2a7d28e1ce04"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_MONTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="90" y="0" width="87" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="0a1239c5-95ba-4484-86c8-96ad8f2c1ed9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="90" y="21" width="87" height="15" uuid="9c7113b2-1f45-4234-8b20-42e066749ea1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_NUMOPERACION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="476" y="21" width="96" height="15" uuid="b1c125d7-09e9-40a4-9113-a89dd9e17fb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_TIPO_CAMBIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="46" width="111" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="8bbe9226-89df-40d2-b663-b5d2744d0c7f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[RFC banco beneficiario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="111" y="46" width="154" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="a0e09c05-6d51-423b-bdf6-aaeaa577a3ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Cuenta beneficiaria:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2" y="66" width="109" height="15" uuid="2247ddc9-b0cd-4fee-a9c4-b4e8171a31f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_RFCEMISORCTABEN}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="111" y="66" width="154" height="15" uuid="30995954-13cd-4d6f-a09b-1abff1cddc53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_CTABENEFICIARIO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="64" width="572" height="1" uuid="924caa26-2245-41ee-9c10-e8b6a223bd75"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="265" y="46" width="130" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="43e094b3-7b6b-40e7-b564-82deb51b2f2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Lugar de expedición:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="395" y="46" width="177" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="4432a7fa-ddf1-46bd-a688-4832e5df33d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Régimen fiscal:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="265" y="66" width="130" height="15" uuid="74deafd8-9871-4d3b-b932-afb2a10089d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_LUGAR_EXPEDICION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="395" y="66" width="178" height="15" uuid="b327948b-5c61-46dc-98ff-1446846ac9c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_REGIMEN_FISCAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="18" width="572" height="1" uuid="7305854c-b933-4027-8eed-b4f48a6e524c"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="42" width="572" height="1" uuid="7f38d4a6-733c-4998-8f44-194820f354f5"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="10" width="572" height="1" uuid="892681e9-9304-4806-9280-475303ad5d8d"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="31" width="572" height="1" uuid="9f0bd92b-15c1-468d-97ce-d8963bb7d14c"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="2" y="14" width="66" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="c7fe1a49-fe3d-4570-8645-9a8d122b95f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="68" y="14" width="89" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="564b2be4-d462-4196-9124-4148c7df5287"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="157" y="14" width="151" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="a8c046df-58a5-4506-a20c-ba24e87dbd0a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[UUID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="308" y="14" width="62" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="6e01981c-5d09-4319-b73b-77e4cb76682b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Saldo anterior]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="370" y="14" width="58" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="af02aed3-50f6-4abf-9044-bb26709d4a05"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Importe pagado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="428" y="14" width="55" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="b7d868f7-9751-4b52-b30f-60eaa1b5e94f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo insoluto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="483" y="14" width="55" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="2df0c337-3b9e-4b6c-b7fb-a7101519213e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[M. pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="538" y="14" width="34" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="02fa4ac8-bfb3-4de5-b89d-a08f2f1589ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parc.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="68" y="0" width="89" height="15" uuid="6cd98537-3fb0-48d9-a1ec-a52dab56b504"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAGO_FECHAPAGO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="158" y="0" width="150" height="15" uuid="7583c1ff-7cff-4571-8199-a5088244f583"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCEPTO_PAGOS_COMP_IDDOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="0" width="32" height="15" uuid="83356256-3f73-43de-8b3a-b34d1002a52b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCEPTO_PAGOS_COMP_SERIE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="308" y="0" width="62" height="15" uuid="f1b89208-bb2c-4518-9d4c-9d8f808400d8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCEPTO_PAGOS_COMP_IMPSALDOANT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="35" y="0" width="33" height="15" uuid="c64a3ea9-549b-4e47-9030-dc476a8ee4be"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCEPTO_PAGOS_COMP_FOLIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="370" y="0" width="58" height="15" uuid="4cb41b17-01cd-4fe9-a456-cfc9883c9a7f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCEPTO_PAGOS_COMP_IMPPAGADO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="428" y="0" width="55" height="15" uuid="06ab3b69-d018-41b9-aba0-c8ef5bd399a4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCEPTO_PAGOS_COMP_IMPSALDOINSOLUTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="484" y="0" width="55" height="15" uuid="61c04e25-0c71-4175-aa12-6f840a2846a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCEPTO_PAGOS_COMP_METODODEPAGODR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="539" y="0" width="34" height="15" uuid="7bada15f-81f6-4db7-a516-4aea462e49c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCEPTO_PAGOS_COMP_NUMPARCIALIDAD}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="273" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="258" width="572" height="15" forecolor="#000000" backcolor="#0B2161" uuid="62c4a327-334f-41f5-aaee-8c9f1a1bd34c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[**ESTE DOCUMENTO ES UNA REPRESENTACIÓN IMPRESA DE UN CFDI CON COMPLEMENTO DE PAGO**]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="265" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="a323f265-0eef-4ffd-a77e-c4eb0247c874"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Número de serie del certificado de sello digital]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="307" y="0" width="265" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="8b7fea31-d631-4ecc-ab0d-342ce9e85f11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Número de serie del certificado de sello digital SAT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="15" width="263" height="15" uuid="c6d74fd7-0b07-4ab2-927e-b81676018203"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_NO_CERTIFICADO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="15" width="263" height="15" uuid="2ba98513-5d43-4406-9ff5-510f189a8b7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_NO_CERTIFICADO_SAT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="30" width="265" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="b7dcd97c-7cc4-42b3-8c48-d00949918c8d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Sello digital del SAT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="45" width="265" height="37" uuid="63b1f49a-e68d-416d-847f-b6dca34bfb90"/>
+				<textElement verticalAlignment="Top">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_SELLO_SAT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="308" y="30" width="265" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="a95a76ce-e44c-48de-b3f5-7e4b0dc1f3ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Sello digital del CFDI]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="309" y="45" width="263" height="37" forecolor="#000000" backcolor="#FFFFFF" uuid="efc3b97f-7698-4cad-80ed-a19492dba6e6"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_SELLO_CFD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="82" width="265" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="ed069653-5186-4a6f-859a-5e574c83d88e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Cadena original del complemento de certificación digital del SAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="170" width="265" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="e1e041bc-cbff-4391-b157-7de781376625"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Fecha y hora de certificación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="216" width="265" height="15" forecolor="#FFFFFF" backcolor="#0B2161" uuid="f2cbb0f3-d082-4654-a1bd-b517e1d9f2a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Folio fiscal]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="231" width="265" height="15" uuid="d34e7eee-227f-4941-9ec3-3f72f7c40e21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_UUID}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="185" width="265" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="da7f69c9-d1e9-4fbb-890c-85d4a8600a0f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FACTURA_COMPLEMENTO_FECHA_TIMBRADO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="1" y="97" width="264" height="73" forecolor="#000000" backcolor="#FFFFFF" uuid="507f0097-41c9-4dac-a5d4-d665191daf94"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["||" +$F{FACTURA_COMPLEMENTO_VERSIONCFD}.toString()+"|" + $F{FACTURA_COMPLEMENTO_UUID} + "|" +$F{FACTURA_COMPLEMENTO_FECHA_TIMBRADO}.toString()+ "|" +$F{FACTURA_COMPLEMENTO_RFC_PROV_CERT} + "|" +$F{FACTURA_COMPLEMENTO_SELLO_CFD} + "|"+ $F{FACTURA_COMPLEMENTO_NO_CERTIFICADO_SAT}+"||"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="354" y="97" width="197" height="149" uuid="e5826c49-997c-4b34-b561-bcd03f01a5b1"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(     new com.google.zxing.qrcode.QRCodeWriter().encode(             "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx?id="+$F{FACTURA_COMPLEMENTO_UUID}+"&re="+$F{FACTURA_COMPLEMENTO_RFC_E}+"&rr="+$F{FACTURA_COMPLEMENTO_RFC_R}+"&tt="+$F{FACTURA_COMPLEMENTO_TOTAL}+"&fe="+$F{FACTURA_COMPLEMENTO_SELLO_CFD}.substring(($F{FACTURA_COMPLEMENTO_SELLO_CFD}.length()-8),$F{FACTURA_COMPLEMENTO_SELLO_CFD}.length()), com.google.zxing.BarcodeFormat.QR_CODE, 200, 200))]]></imageExpression>
+			</image>
+		</band>
+	</columnFooter>
+</jasperReport>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2020 01:37:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.model.Comunicado" table="COMUNICADO" schema="dbo" catalog="PortalProvNac" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="fecha" type="timestamp">
+            <column name="FECHA" length="23" />
+        </property>
+        <property name="ruta" type="string">
+            <column name="RUTA" length="500" />
+        </property>
+        <property name="ruta2" type="string">
+            <column name="RUTA2" length="500" />
+        </property>
+        <property name="ruta3" type="string">
+            <column name="RUTA3" length="500" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,320 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!--    <f:metadata>
+            <f:event type="preRenderView" listener="{filterByBean.listarTodo()}"/>
+        </f:metadata>-->
+    <link href="../resources/css/modal.css" rel="stylesheet" type="text/css"/>
+    <body>
+
+        <ui:composition template="./../Template/Template.xhtml">
+
+            <ui:define name="top">
+
+            </ui:define>
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="900000" />
+                <p:dialog style="font-size: 15px;" header="DECORADOS Y SATINADOS MEXICANOS S.A DE C.V." widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="1280" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png"  alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 20px; font-weight: bold " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+                <!--Formulario para buscar número de referencia-->
+                <h:form>
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value="Sesión iniciada: #{loginBean.usuario.correo}"/><br></br> 
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value=" RFC: #{loginBean.usuario.rfc}"/><br></br>     
+                    <label style="color: #FFFFFF !important; font-size: 14px">Cerrar sesión</label>
+                    <p:commandLink id="salir" 
+                                   title="CERRAR SESIÓN"
+                                   action="/index?faces-redirect=true" 
+                                   actionListener="#{loginBean.cerrarSesion()}">
+                        <h:graphicImage url="../img/exit.png" style="height: 35px"/> 
+                    </p:commandLink>
+                </h:form>
+                <h:form id="frmBuscar">
+
+                    <p:growl id="mensaje" showSummary="true" life="50000" showDetail="true"></p:growl>
+                    <p:panel id="pnlBuscar">
+                        <p:toolbar>
+                            <f:facet name="left">                               
+                                <p:spacer width="35%" height="1"></p:spacer>
+                                <p:outputLabel value="REPORTE PROVEEDORES:"></p:outputLabel><br></br>
+                                <p:commandButton id="frecepcion" oncomplete="PF('dlgFilterByFechas').show();" style="height: 35px; color: #FFFFFF; background-color: #1D60A4 !important;" value="FECHAS DE PAGO"/>
+
+                            </f:facet>
+                        </p:toolbar>                          
+                    </p:panel>
+                </h:form>
+
+                <!--Formulario principal-->
+
+                <h:form id="frmPrincipal">
+                    <p:tooltip id="toolExcel" for="xls" value="Exportar a Excel" trackMouse="true"></p:tooltip>
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:panel id="pnlPrincipal" header="REPORTE PROVEEDORES" style="margin: 0 auto; text-align: center; font-size: 13px">
+                        <label>EXPORTAR INFORMACIÓN A EXCEL </label>&nbsp;
+                        <h:commandLink id="xls" immediate="true">
+                            <p:graphicImage url="../Images/excel.png" width="50"/>
+                            <p:dataExporter type="csv" target="tblPrincipal"  fileName="Proveedores"/>
+                        </h:commandLink>
+                        <p:layoutUnit id="tablaPrincipal" position="center" style="padding: 5px; text-align: center;">
+                            <p:dataTable style="font-size: 9px" 
+                                         id="tblPrincipal" 
+                                         paginator="true" 
+                                         rows="20" 
+                                         sortMode="multiple"
+                                         paginatorPosition="top" 
+                                         var="tbl" 
+                                         scrollable="true"
+                                         value="#{filterByBean.listaCompleta}">                           
+                                <p:ajax event="sort" skipChildren="false" />
+                                <p:column  headerText="TIPO POLIZA">
+                                    <h:outputText value="#{tbl.oc.contains('T') ? 'ET' : 'EB'}" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column filterBy="#{tbl.cheque}" sortBy="#{tbl.cheque}" headerText="NO">
+                                    <h:outputText value="#{tbl.cheque.trim()}" style="color: #0078A7; font-weight: bold"/>
+                                </p:column>
+                                <p:column filterBy="#{tbl.noTransferencia}" sortBy="#{tbl.noTransferencia}" headerText="NO">
+                                    <h:outputText value="#{tbl.noTransferencia.trim().replaceFirst('0', '\'0')}" style="color: #0078A7; font-weight: bold">
+                                        <f:convertNumber groupingUsed="false"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column  headerText="Fecha">
+                                    <h:outputText value="#{tbl.fechaPago.substring(0,10)}" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column  headerText="Folio">
+                                    <h:outputText value="#{tbl.folio} " style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column  headerText="Fecha">
+                                    <h:outputText value="#{tbl.fecha.substring(0,10)}" style="color: #0078A7; font-weight: bold"/>
+                                </p:column>
+                                <p:column  headerText="Folio">
+                                    <h:outputText value="#{tbl.fcomp}" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column filterBy="#{tbl.uuidrel}" sortBy="#{tbl.uuidrel}"  headerText="UUID Comprobante">
+                                    <h:outputText value="#{tbl.uuidrel}" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column  headerText="Proveedor, Servicios, Arrendador">
+                                    <h:outputText value="Proveedor" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column  headerText="Nombre">
+                                    <h:outputText value="#{tbl.nombreE}" style="color: #0078A7; font-weight: bold"/>
+                                </p:column>
+                                <p:column filterBy="#{tbl.rfcE}" sortBy="#{tbl.rfcE}"  headerText="RFC">
+                                    <h:outputText value="#{tbl.rfcE}" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column  headerText="UUID Factura">
+                                    <h:outputText value="#{tbl.uuid}" style="color: #0078A7; font-weight: bold"/>
+                                </p:column>
+                                <p:column  headerText="Concepto">
+                                    <h:outputText value="#{tbl.conceptos}" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="Importe USD">
+                                    <h:outputText value="" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="Tipo cambio">
+                                    <h:outputText value="#{tbl.tipoCambio}" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="Fecha TC">
+                                    <h:outputText value="" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="Base 0%">
+                                    <h:outputText value="#{tbl.base0}"  />
+                                </p:column>
+                                <p:column headerText="Base 16%">
+                                    <h:outputText value="#{tbl.base16}" />
+                                </p:column>
+                                <p:column headerText="8%">
+                                    <h:outputText value="" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="0%">
+                                    <h:outputText value="" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="IVA 16%">
+                                    <h:outputText value="#{tbl.importeCouta}" style="color: #E60013; font-weight: bold">
+                                        <f:convertNumber locale="MX" pattern="#0.000" type="currency"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="8%">
+                                    <h:outputText value="" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="EXENTOS">
+                                    <h:outputText value="" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="10.6666%">
+                                    <h:outputText value="" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="4.0000%">
+                                    <h:outputText value="#{tbl.ivaRet04}" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="IVA RETENIDO 6.0000%">
+                                    <h:outputText value="#{tbl.ivaRet06}" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="ISR 10%">
+                                    <h:outputText value="#{tbl.importeCuotaIsr}" style="color: #0078A7; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText=" IMPUESTOS LOCALES 3%">
+                                    <h:outputText value="" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText=" OTROS IMPUESTOS">
+                                    <h:outputText value="" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="IEPS">
+                                    <h:outputText value="" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="OTROS DESCUENTOS">
+                                    <h:outputText value="#{tbl.descuento}" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="NO DEDUCIBLES">
+                                    <h:outputText value="" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText=" SALDOS A FAVOR O A CARGO DE  ANTICIPOS A  PROVEEDORES">
+                                    <h:outputText value="" style="color: #E60013; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="$ TOTAL">
+                                    <h:outputText value="#{tbl.total}" style="color: #E60013; font-weight: bold">
+                                        <f:convertNumber currencySymbol="$" type="currency" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="CHEQUE, TRANSFERENCIA">
+                                    <h:outputText value="#{tbl.tipoPago}" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="FECHA">
+                                    <h:outputText value="" style="color: #021f3c; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="$ IMPORTE">
+                                    <h:outputText value="#{tbl.total}" style="color: #E60013; font-weight: bold">
+                                        <f:convertNumber currencySymbol="$" type="currency" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="$ IMPORTE">
+                                    <h:outputText value="#{tbl.total}" style="color: #E60013; font-weight: bold">
+                                        <f:convertNumber currencySymbol="$" type="currency" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="BANCO">
+                                    <h:outputText value="HSBC" style="color: #0078A7; font-weight: bold"/>
+                                </p:column>
+                                <p:column headerText="">
+                                    <h:outputText value="-" style="color: #0078A7; font-weight: bold"/>
+                                </p:column>
+
+                                <p:column headerText="Factura" exportable="false">
+                                    <p:commandButton value="" disabled="#{tbl.wcxp!=NULL}"
+                                                     oncomplete="PF('dialogVerXML').show();" update="frmVerXML"
+                                                     style="height: 35px; width: 35px;
+                                                     background-size: 35px;
+                                                     background-image: url('../Images/factura.png') !important; 
+                                                     background-repeat: no-repeat">
+                                        <f:setPropertyActionListener target="#{filterByBean.factura}" value="#{tbl}"/>
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column headerText="Complemento" exportable="false">
+                                    <p:commandButton value="" disabled="#{tbl.wcxp!=NULL}"
+                                                     oncomplete="PF('dialogVerComp').show();" update="frmVerComp"
+                                                     style="height: 35px; width: 35px;
+                                                     background-size: 35px;
+                                                     background-image: url('../Images/factura.png') !important; 
+                                                     background-repeat: no-repeat">
+                                        <f:setPropertyActionListener target="#{filterByBean.factura}" value="#{tbl}"></f:setPropertyActionListener>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>                      
+                        </p:layoutUnit>                    
+                    </p:panel>                
+                </h:form>
+                <!--Formulario principal-->
+
+                <!--FORMULARIO PARA VER EL PDF DEL XML-->
+                <h:form id="frmVerXML">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"/>
+                    <p:dialog style="font-size: 12px;" id="dlgVerXML" header="Visualizar factura del XML" widgetVar="dialogVerXML" resizable="false" 
+                              showEffect="clip" hideEffect="size" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="UUID"/>
+                            <p:inputText id="uuid" value="#{filterByBean.factura.uuid}" style="width: 250px" readonly="true"/>
+                        </p:panelGrid><br></br>
+                        <p:spacer width="100px" height="5px"/>
+                        <h:commandLink id="reporte" 
+                                       value="" 
+                                       style="height: 30px;  font-size: 16px;" 
+                                       target="_blank" 
+                                       actionListener="#{facturaBean.visualizarCFDI_PDF()}" 
+                                       onclick="PF('dialogVerXML').hide()">
+                            <h:graphicImage url="/Images/printer.png" style="height: 80px"/> 
+                        </h:commandLink>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA VER EL PDF DEL XML-->
+
+                <!--FORMULARIO PARA VER EL PDF DEL COMPLEMENTO DEL XML-->
+                <h:form id="frmVerComp">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgVerComp" header="Visualizar factura del XML" widgetVar="dialogVerComp" resizable="false" 
+                              showEffect="clip" hideEffect="size" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="UUID"></p:outputLabel>
+                            <p:inputText id="uuidrel" value="#{filterByBean.factura.uuidrel}" style="width: 250px" readonly="true"></p:inputText>
+                        </p:panelGrid><br></br>
+                        <p:spacer width="100px" height="5px"></p:spacer>
+                        <h:commandLink id="reporte" 
+                                       value="" 
+                                       style="height: 30px;  font-size: 16px" 
+                                       target="_blank" 
+                                       actionListener="#{facturaBean.visualizarCFDI_COMP()}" onclick="PF('dialogVerComp').hide()">
+                            <h:graphicImage url="/Images/printer.png" style="height: 80px"/> 
+                        </h:commandLink>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA VER EL PDF DEL COMPLEMENTO DEL XML-->
+
+
+
+                <!--FORMULARIO PARA BUSCAR POR FECHAS-->
+                <h:form id="frmFechas">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"/>
+                    <p:dialog style="font-size: 12px;" id="dlgFechas" header="FECHAS DE PAGO" 
+                              widgetVar="dlgFilterByFechas" resizable="false" 
+                              showEffect="puff" hideEffect="clip" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="FECHA INICIAL" />
+                            <p:calendar  id="fecha_inicio" yearRange="2014:2030"  
+                                         effect="blind" effectDuration="13000" pages="2" showOn="button" 
+                                         style="width: 150px;" value="#{filterByBean.filterFec3}" 
+                                         required="true" placeholder="Ingrese fecha inicial"
+                                         pattern="yyyy-MM-dd" mask="true">
+                            </p:calendar>   
+                            <p:outputLabel value="FECHA FINAL" />
+                            <p:calendar  id="fecha_final" yearRange="2014:2025"  
+                                         effect="blind" effectDuration="13000" pages="2" showOn="button" 
+                                         style="width: 150px;" value="#{filterByBean.filterFec4}" 
+                                         required="true" placeholder="Ingrese fecha final"
+                                         pattern="yyyy-MM-dd" mask="true">
+                            </p:calendar>                   
+                        </p:panelGrid><br></br>
+                        <p:spacer width="160px" height="5px"/>
+                        <p:commandButton id="buscarFec" 
+                                         value="" 
+                                         style="height: 40px; width: 40px;  font-size: 16px; background-image: url('../img/pagoRep.png') !important; background-size: 40px; background-repeat: no-repeat"  
+                                         actionListener="#{filterByBean.listarAll()}" 
+                                         update="frmPrincipal" 
+                                         oncomplete="PF('dlgFilterByFechas').hide()">
+                            <p:tooltip for="buscarFec" value="Clic para buscar factura" trackMouse="true"/>
+                        </p:commandButton>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA BUSCAR POR FECHAS-->
+
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

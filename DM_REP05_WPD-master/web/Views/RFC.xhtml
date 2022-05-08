@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template/Template.xhtml">
+
+            <ui:define name="top">
+
+            </ui:define>
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="900000" />
+                <p:dialog style="font-size: 15px;" header="DECORADOS Y SATINADOS MEXICANOS S.A DE C.V." widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="1280" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png"  alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 20px; font-weight: bold " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+                <h2>RESPONSABLES RFC PROVEEDORES</h2> 
+
+                <!--Formulario principal-->
+                <h:form>
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value="Sesión iniciada: #{loginBean.usuario.correo}"/><br></br> 
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value=" RFC: #{loginBean.usuario.rfc}"/><br></br>      
+                    <p:commandLink id="salir" 
+                                   title="CERRAR SESIÓN"
+                                   action="/index?faces-redirect=true" 
+                                   actionListener="#{loginBean.cerrarSesion()}">
+                        <h:graphicImage url="../img/exit.png" style="height: 35px"/> 
+                    </p:commandLink>
+                </h:form>
+
+                <h:form id="frmPrincipal">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:panel id="pnlPrincipal" header="" style="margin: 0 auto; text-align: center; font-size: 13px">
+                        <p:layoutUnit id="tablaPrincipal" position="center" style="padding: 5px; text-align: center;">
+                            <p:dataTable  style="font-size: 11px" id="tblPrincipal" paginator="true" rows="13" sortMode="multiple" paginatorPosition="top" var="tbl" value="#{usuarioBean.listaUsuario}">                           
+                                <p:ajax event="sort" skipChildren="false" />
+                                <p:column headerText="Correo proveedor">
+                                    <h:outputText value="#{tbl.correo}"></h:outputText>
+                                </p:column>
+                                <p:column filterBy="#{tbl.rfc}" sortBy="#{tbl.rfc}" headerText="RFC">
+                                    <h:outputText value="#{tbl.rfc}"></h:outputText>
+                                </p:column>                           
+                                <p:column  headerText="Fecha alta">
+                                    <h:outputText value="#{tbl.fecalta}"></h:outputText>
+                                </p:column>
+                                <p:column  headerText="Responsable">
+                                    <h:outputText value="#{tbl.responsable}"></h:outputText>
+                                </p:column>
+                                <p:column width="50">
+                                    <p:commandButton id="mdf" value="" style="height: 35px; width: 30px;
+                                                     background-size: 35px;
+                                                     background-image: url('../Images/user-setting.png') !important; 
+                                                     background-repeat: no-repeat"
+                                                     oncomplete="PF('dlgEditar').show()"
+                                                     update="frmEditar">
+                                        <f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{tbl}"></f:setPropertyActionListener>
+                                    </p:commandButton>
+                                    <p:tooltip id="toolMDF" for="mdf" value="Editar responsable RFC Proveedor" trackMouse="true"></p:tooltip>
+                                </p:column>                             
+                            </p:dataTable>                      
+                        </p:layoutUnit>                    
+                    </p:panel>                
+                </h:form>
+                <!--Formulario principal-->
+
+                <h:form id="frmEditar" style="font-size: 12px;">
+                    <p:dialog id="dialogoEditar" header="Editar responsable RFC Proveedores" resizable="false" 
+                              widgetVar="dlgEditar" modal="true" showEffect="clip" hideEffect="clip"
+                              width="500" height="150"><br></br>
+                        <p:panelGrid columns="2" style="margin:  0 auto">  
+                            <p:outputLabel value="RFC Proveedor"></p:outputLabel>
+                            <p:inputText value="#{usuarioBean.usuario.rfc}" readonly="true"></p:inputText>
+                            <p:outputLabel value="Responsable cuentas por pagar"></p:outputLabel>
+                            <p:selectOneMenu style="size: 100px" required="true" value="#{usuarioBean.usuario.responsable}">
+                                <f:selectItem itemLabel="CDMX" itemValue="Cuentas por pagar DF"></f:selectItem>
+                                <f:selectItem itemLabel="TOLUCA" itemValue="Cuentas por Pagar Toluca"></f:selectItem>
+                            </p:selectOneMenu>
+                        </p:panelGrid> 
+                        <p:spacer height="30px" width="235px"></p:spacer>
+                        <p:commandButton id="btnCancelar" value="Cancelar" style="background-color: #045491; color: #FFFFFF; font-size: 17px"
+                                         oncomplete="PF('dlgUpdatePayment').hide()"/>   
+                        <p:commandButton id="btnActualizar" value="Actualizar" style="background-color: #FF2F0B; color: #FFFFFF; font-size: 17px"
+                                         oncomplete="PF('dlgEditar').hide()" 
+                                         actionListener="#{usuarioBean.updateUsuario()}"
+                                         update="frmPrincipal,frmPrincipal:mensaje">
+                        </p:commandButton> 
+                        <p:tooltip id="toolBtn" for="btnActualizar" value="Actualizar responsable RFC Proveedor" trackMouse="true"></p:tooltip>
+                        <p:tooltip id="toolBtnCan" for="btnCancelar" value="Cancelar" trackMouse="true"></p:tooltip>
+                    </p:dialog>                   
+                </h:form>
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

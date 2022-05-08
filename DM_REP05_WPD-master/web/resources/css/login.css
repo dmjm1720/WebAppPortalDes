@@ -1,0 +1,29 @@
+body{
+/*    background: #000033;*/
+    font-size: 11px;
+    font-family: 'Questrial', sans-serif;
+    color: #E60013;
+    margin: 10px;
+}
+.login{
+    background-color:#E2E2E2;
+    color: #eeeded;
+    width: 400px;
+    height: 255px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12%;
+    border-color: #999999;
+    border-radius: 15px;
+}
+
+
+img{
+    height: 30px;
+}
+
+
+button{
+    height: 30px;
+    margin-left: 12%;
+}

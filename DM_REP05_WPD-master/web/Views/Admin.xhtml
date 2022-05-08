@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!--    <f:metadata>
+            <f:event type="preRenderView" listener="{filterByBean.listarTodo()}"/>
+        </f:metadata>-->
+    <link href="../resources/css/modal.css" rel="stylesheet" type="text/css"/>
+    <body>
+
+        <ui:composition template="./../Template/Template.xhtml">
+
+            <ui:define name="top">
+
+            </ui:define>
+
+            <ui:define name="content">
+                <!--Formulario para buscar número de referencia-->
+                <h:form>
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value="Sesión iniciada: #{loginBean.usuario.correo}"/><br></br> 
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value=" RFC: #{loginBean.usuario.rfc}"/><br></br>     
+                    <label style="color: #FFFFFF !important; font-size: 14px">Cerrar sesión</label>
+                    <p:commandLink id="salir" 
+                                   title="CERRAR SESIÓN"
+                                   action="/index?faces-redirect=true" 
+                                   actionListener="#{loginBean.cerrarSesion()}">
+                        <h:graphicImage url="../img/exit.png" style="height: 35px"/> 
+                    </p:commandLink>
+                </h:form>
+                <h:form id="frmBuscar">
+
+                    <p:growl id="mensaje" showSummary="true" life="50000" showDetail="true"></p:growl>
+                    <p:panel id="pnlBuscar">
+                        <p:toolbar>
+                            <f:facet name="left">                               
+                                <p:spacer width="35%" height="1"></p:spacer>
+                                <p:outputLabel value="BUSCAR FACTURA POR:"></p:outputLabel><br></br>
+                                <!--                                <p:commandButton id="rfc" oncomplete="PF('dlgFilterByRFC').show();" style="height: 30px; color: #FFFFFF; background-color: #1D60A4 !important;" value="RFC"/>-->
+                                <!--                                <p:commandButton id="nfactura" oncomplete="PF('dlgFilterByFactura').show();" style="height: 30px; color: #FFFFFF; background-color: #1D60A4 !important;" value="No Factura"/>-->
+                                <p:commandButton id="frecepcion" oncomplete="PF('dlgFilterByFechas').show();" style="height: 35px; color: #FFFFFF; background-color: #1D60A4 !important;" value="Fechas de recepción"/>
+
+                                <!--                                <p:commandButton id="nrecepcion" oncomplete="PF('dlgFilterByRecepcion').show();" style="height: 30px; color: #FFFFFF; background-color: #1D60A4 !important;" value="No de recepción"/>
+                                                                <p:commandButton id="fwcxp" oncomplete="PF('dlgFilterByWCXP').show();" style="height: 30px; color: #FFFFFF; background-color: #1D60A4 !important;" value="Folio WCXP"/>
+                                                                <p:commandButton id="estatus" oncomplete="PF('dlgFilterByEstatus').show();" style="height: 30px; color: #FFFFFF; background-color: #1D60A4 !important;" value="Estatus"/>
+                                                                <p:commandButton id="pdfP" disabled="{loginBean.usuario.rfc!='developer'}" actionListener="{generarPDFBean.pdfProveedores()}" style="height: 25px;" value="Generar PDF Prov"/>
+                                                                <p:commandButton id="pdfG" disabled="{loginBean.usuario.rfc!='developer'}" actionListener="{generarPDFBean.pdfGastos()}" style="height: 25px;"  value="Generar PDF Gastos"/>-->
+                                <p:commandButton value="Actualizar" actionListener="#{filterByBean.revisarComprobantes()}"/>
+                                <p:commandButton value="Revisar comprobantes" actionListener="#{filterByBean.actualizarDatosFolio()}"/>
+                                <p:commandButton value="Revisar Conceptos" actionListener="#{filterByBean.actualizarDatosConceptos()}"/>
+                                <p:commandButton value="Revisar Conceptos gastos" actionListener="#{filterByBean.actualizarDatosConceptosGastos()}"/>
+                                <p:commandButton value="Impuesto proveedores" actionListener="#{impuestos.revisarImpuestos()}"/>
+                                <p:commandButton value="Impuesto gastos" actionListener="#{impuestos.revisarImpuestosGastos()}"/>
+                                <p:commandButton value="Ingresar conceptos" actionListener="#{impuestos.revisarImpuestosGastos()}"/>
+                                <p:commandButton style="height: 35px; color: #FFFFFF; background-color: #00A4AE !important;" value="Ingresar descuentos" actionListener="#{descuento.revisarImpuestosDescuento()}"/>
+                            </f:facet>
+                        </p:toolbar>                          
+                    </p:panel>
+                </h:form>
+
+                <!--Formulario principal-->
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

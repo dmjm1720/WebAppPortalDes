@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template/Template.xhtml">
+
+            <ui:define name="content">
+                <h2>QUEJAS Y SUGERENCIAS</h2> 
+                <!--Formulario para buscar número de referencia-->
+                <h:form>
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value="Sesión iniciada: #{loginBean.usuario.correo}"/><br></br> 
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value=" RFC: #{loginBean.usuario.rfc}"/><br></br>     
+                    <p:commandLink id="salir" 
+                                   title="CERRAR SESIÓN"
+                                   action="/index?faces-redirect=true" 
+                                   actionListener="#{loginBean.cerrarSesion()}">
+                        <h:graphicImage url="../img/exit.png" style="height: 35px"/> 
+                    </p:commandLink>
+                </h:form>
+                <h:form id="frmBuscar">
+                   
+                    <p:growl id="mensaje" showSummary="true" life="50000" showDetail="true"></p:growl>
+                    <p:blockUI block="pnlBuscar" trigger="buscar">   
+                        <h3 style="font-size: 15px; color: black">Por favor espere...</h3>
+                        <p:graphicImage value="../../Images/loader.gif" style="height: 150px; width: 200px"></p:graphicImage>
+                    </p:blockUI>
+                    <p:panel id="pnlBuscar">
+                        <p:toolbar>
+                            <f:facet name="left">
+                                <p:commandButton style="font-size: 13px; height: 35px" 
+                                                 id="buscar" oncomplete="PF('dlgFactura').show()" 
+                                                 update="frmBuscar,:frmPrincipal"  value="Agregar sugerencia">
+                                </p:commandButton>
+                            </f:facet>
+                        </p:toolbar>                          
+                    </p:panel>
+                </h:form>
+                <!--Formulario para buscar número de referencia-->
+                <!--Formulario principal-->
+                <h:form id="frmPrincipal">
+                    <p:panel id="pnlPrincipal" header="" style="margin: 0 auto; text-align: center; font-size: 13px">
+                        <p:layoutUnit id="tablaPrincipal" position="center" style="padding: 5px; text-align: center;">
+                            <p:dataTable id="tblPrincipal" paginator="true" rows="13" sortMode="multiple" paginatorPosition="top" var="tbl" value="#{quejaBean.listaQueja}">                           
+                                <p:column width="80%" headerText="Comentario">
+                                    <h:outputText value="#{tbl.comentarioprov}"></h:outputText>
+                                </p:column>
+                                <p:column width="20%" headerText="Fecha comentario">
+                                    <h:outputText value="#{tbl.feccomentario}"></h:outputText>
+                                </p:column>
+                            </p:dataTable>                      
+                        </p:layoutUnit>                    
+                    </p:panel>                
+                </h:form>
+                <!--Formulario principal-->
+
+
+                <!--Formulario para ingresar datos de la factura-->
+                <h:form id="frmFactura" style="font-size: 12px">
+                    <p:dialog id="dlgFact" widgetVar="dlgFactura" header="Sugerencias"
+                              showEffect="clip" hideEffect="explode"  resizable="false" responsive="true">                       
+                        <p:panel id="pnlFact">
+                            <p:panelGrid id="pnlFactura" columns="2" style="margin: 0 auto">
+                                <p:outputLabel value="Comentario"></p:outputLabel>
+                                <p:inputTextarea id="c" style="width: 300px;" value="#{quejaBean.queja.comentarioprov}" label="" placeholder="" required="true" onkeyup="javascript:this.value = this.value.toUpperCase();"></p:inputTextarea>               
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:spacer width="400" height="5"></p:spacer>
+                        <p:commandButton id="track" style="height: 35px; width: 100px; background-image: url('../..//Images/save.png') !important;background-size: 25px; background-repeat: no-repeat"  
+                                         value="Enviar" onclick="PF('dlgInfo').show()" update="frmBuscar:mensaje,frmPrincipal,frmFactura:c" oncomplete="PF('dlgFactura').hide()"  actionListener="#{quejaBean.insertQueja()}" 
+                                         >
+                        </p:commandButton>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario para ingresar datos de la factura-->
+
+                <!--Formulario del diálogo-->
+                <h:form>
+                    <p:dialog style="font-size: 12px;"  widgetVar="dlgInfo" 
+                              showEffect="slide" 
+                              hideEffect="clip"  
+                              height="300" closable="false" resizable="false" modal="true">  
+                        <h3 style="font-size: 15px; color: black">Enviando su comentario, por favor espere...</h3>
+                        <p:spacer width="35px"></p:spacer><p:graphicImage value="../Images/correo.gif" style="height: 250px; width: 300px"></p:graphicImage>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario del diálogo-->
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

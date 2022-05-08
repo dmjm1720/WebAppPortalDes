@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd">
+
+<hibernate-reverse-engineering>
+    <schema-selection match-catalog="PortalProvNac" match-schema="dbo"/>
+    <table-filter match-name="PAGO"/>
+    <table-filter match-name="CONCEPTO_PAGOS_COMP"/>
+    <table-filter match-name="PAGO_GTO"/>
+    <table-filter match-name="CUENTAS"/>
+    <table-filter match-name="CONCEPTO_GASTOS"/>
+    <table-filter match-name="CONCEPTO"/>
+    <table-filter match-name="MENSAJE"/>
+    <table-filter match-name="CONCEPTO_GASTOS_PROV"/>
+    <table-filter match-name="FACTURA_GASTOS_PROV"/>
+    <table-filter match-name="FACTURA_COMPLEMENTO_GTO"/>
+    <table-filter match-name="FACTURA_GASTOS"/>
+    <table-filter match-name="FACTURA"/>
+    <table-filter match-name="CONCEPTO_PAGOS_COMP_GTO"/>
+    <table-filter match-name="QUEJA"/>
+    <table-filter match-name="FACTURA_COMPLEMENTO"/>
+    <table-filter match-name="CONCEPTO_COMPLEMENTO_GTO"/>
+    <table-filter match-name="USUARIO"/>
+    <table-filter match-name="COMUNICADO"/>
+    <table-filter match-name="DEPOSITO"/>
+    <table-filter match-name="DIAS_PAGO"/>
+    <table-filter match-name="CONCEPTO_COMPLEMENTO"/>
+    <table-filter match-name="PAGA_M01"/>
+    <table-filter match-name="CORREO"/>
+</hibernate-reverse-engineering>

@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template/Template.xhtml">
+
+            <ui:define name="top">
+
+            </ui:define>
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="900000" />
+                <p:dialog style="font-size: 15px;" header="DECORADOS Y SATINADOS MEXICANOS S.A DE C.V." widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="1280" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png"  alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 20px; font-weight: bold " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+                <!--Formulario para buscar número de referencia-->
+                <h:form>
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value="Sesión iniciada: #{loginBean.usuario.correo}"/><br></br> 
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value=" RFC: #{loginBean.usuario.rfc}"/><br></br>    
+                    <label style="color: #FFFFFF !important; font-size: 14px">Cerrar sesión</label>
+                    <p:commandLink id="salir" 
+                                   title="CERRAR SESIÓN"
+                                   action="/index?faces-redirect=true" 
+                                   actionListener="#{loginBean.cerrarSesion()}">
+                        <h:graphicImage url="../img/exit.png" style="height: 35px"/> 
+                    </p:commandLink>
+                </h:form>
+                <h:form id="frmBuscar">
+
+                    <p:growl id="mensaje" showSummary="true" life="50000" showDetail="true"></p:growl>
+                    <p:blockUI block="pnlBuscar" trigger="buscar">   
+                        <h3 style="font-size: 15px; color: black">Por favor espere...</h3>
+                        <p:graphicImage value="../Images/loader.gif" style="height: 150px; width: 200px"></p:graphicImage>
+                    </p:blockUI>
+                    <p:panel id="pnlBuscar">
+                        <p:toolbar>
+                            <f:facet name="left">
+                                <table border="0">
+                                    <thead>
+                                        <tr>
+                                            <label>SUBIR COMPROBANTE </label>&nbsp;
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <p:commandButton style="height: 50px; width: 50px; background-image: url('../img/upload.png') !important;background-size: 50px; background-repeat: no-repeat" 
+                                                             id="buscar" oncomplete="PF('dlgXML').show()" 
+                                                             update="frmBuscar,:frmPrincipal"  value=""/>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <p:tooltip id="toolTipTrackbuscar" for="buscar" trackMouse="true" value="SUBIR COMPROBANTE AL SISTEMA"></p:tooltip> 
+                            </f:facet>
+                        </p:toolbar>                          
+                    </p:panel>
+                </h:form>
+                <br></br>
+                <!--Formulario para buscar número de referencia-->
+
+                <!--Formulario principal-->
+
+                <h:form id="frmPrincipal">
+                    <p:panel id="pnlPrincipal" header="RECEPCIÓN DE COMPROBANTES DE PAGO" style="margin: 0 auto; text-align: center; font-size: 13px">
+                        <p:layoutUnit id="tablaPrincipal" position="center" style="padding: 5px; text-align: center;">
+                            <p:spacer height="10"></p:spacer><p:outputLabel style="color: #FF2F0B; font-weight: bold; font-size: 17px;" 
+                                                                            value="LISTA DE COMPROBANTES DE PAGO"></p:outputLabel>
+                            <p:dataTable  style="font-size: 11px" id="tblPrincipal" paginator="true" rows="13" sortMode="multiple"
+                                          paginatorPosition="top" var="tbl" value="#{subirComplementoBean.listaFacturaComplementos}">                           
+                                <p:ajax event="sort" skipChildren="false" />
+                                <p:column  headerText="ESTATUS SAT">
+                                    <h:outputText value="#{tbl.estatusSat}"/>
+                                </p:column>
+                                <p:column  filterBy="#{tbl.factura}" sortBy="#{tbl.factura}" headerText="COMPROBANTE DE PAGO NO.">
+                                    <h:outputText value="#{tbl.factura}"></h:outputText>
+                                </p:column>
+                                <p:column  headerText="FECHA COMPLEMENTO PAGO">
+                                    <h:outputText value="#{tbl.fecha}"></h:outputText>
+                                </p:column>
+                                <!--                                <p:column headerText="$ MONTO COMPLE">
+                                                                    <h:outputText value="{tbl.total}">
+                                                                        <f:convertNumber currencySymbol="$" type="currency"></f:convertNumber>
+                                                                    </h:outputText>
+                                                                </p:column>-->
+                                <p:column  filterBy="#{tbl.foliowcxp}" sortBy="#{tbl.foliowcxp}" headerText="FOLIO COMPROBANTE">
+                                    <h:outputText value="COMP#{tbl.foliowcxp}"></h:outputText>
+                                </p:column>
+                                <p:column  headerText="FECHA RECEPCIÓN COMPROBANTE">
+                                    <h:outputText value="#{tbl.fechaRecepcion}"></h:outputText>
+                                </p:column>
+                                <!--                                <p:column  headerText="Fecha probable de pago">
+                                                                    <h:outputText value="{tbl.fechaPago}"></h:outputText>
+                                                                </p:column>-->
+                                <p:column filterBy="#{tbl.estatus}" sortBy="#{tbl.estatus}" headerText="ESTATUS">
+                                    <h:outputText value="#{tbl.estatus}"></h:outputText>
+                                </p:column>
+                                <!--                                <p:column headerText="Comentario proveedor">
+                                                                    <h:outputText value="{tbl.comentarioProveedor}"></h:outputText>
+                                                                </p:column>
+                                                                <p:column headerText="Comentario Duché">
+                                                                    <h:outputText value="{tbl.comentario}"></h:outputText>
+                                                                </p:column>-->
+                                <!--                                <p:column headerText="Cancelar factura">
+                                                                    <p:commandButton disabled="#{tbl.estatus=='PAGADA' || tbl.estatus=='CANCELADA'}"  style="height: 20px; width: 20px; background-image: url('../Images/cancel.png');background-size: 17px; background-repeat: no-repeat" 
+                                                                                     value="" oncomplete="PF('dlgEdit').show();" update="frmEdit">
+                                                                        <f:setPropertyActionListener target="#{facturaBean.factura}" value="#{tbl}"></f:setPropertyActionListener>
+                                                                    </p:commandButton>
+                                                                </p:column>-->
+                            </p:dataTable>                      
+                        </p:layoutUnit>                    
+                    </p:panel>                
+                </h:form>
+                <!--Formulario principal-->
+
+                <!--Formulario para subir XML del comprobante-->
+                <h:form id="frmXML">                    
+                    <p:dialog style="font-size: 12px;" header="SUBIR XML DEL COMPROBANTE DE PAGO" widgetVar="dlgXML" 
+                              showEffect="slide" 
+                              hideEffect="explode"  height="200" width="500" resizable="false" closable="false" modal="true">
+                        <p:panelGrid columns="2" style="margin: 0 auto">
+                            <h:form id="form"> 
+                                <p:growl id="mensajes" life="10000" showSummary="true" showDetail="true"></p:growl> 
+                                <p:fileUpload id="subir" label="Selecciona tu XML" auto="false" 
+                                              invalidFileMessage="Archivos permitidos XML"
+                                              cancelLabel="Cancelar" 
+                                              uploadLabel="Subir archivo" 
+                                              fileUploadListener="#{subirComplementoBean.upload}" 
+                                              allowTypes="/(\.|\/)(xml)$/" 
+                                              multiple="false" 
+                                              mode="advanced" 
+                                              fileLimit="1"
+                                              update="mensajes, frmBuscar, frmPrincipal:pnlPrincipal" 
+                                              sizeLimit="9000000">
+                                </p:fileUpload> 
+                            </h:form>       
+                        </p:panelGrid>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario para subir XML del comprobante-->
+
+
+                <!--Formulario para ver PDF-->
+                <h:form id="frmVer">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgVer" header="DECORADOS Y SATINADOS MEXICANOS S.A DE C.V." 
+                              widgetVar="dialogVerPDF" resizable="false" 
+                              showEffect="clip" hideEffect="clip" modal="false"
+                              closable="true" closeOnEscape="true"
+                              minimizable="true" maximizable="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+
+                            <p:outputLabel value="Aviso importante"></p:outputLabel>
+                            <object type="application/pdf" data="#{facturaBean.aviso}" height="650px" width="900px" internalinstanceid="5">
+                                Your browser can't display pdf, <a href="#{facturaBean.aviso}">click</a> to download pdf instead.
+                            </object> 
+
+                        </p:panelGrid>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario para ver PDF-->
+
+                <!--Formulario para ver PDF Manual-->
+                <h:form id="frmVerManual">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgVerManual" header="DECORADOS Y SATINADOS MEXICANOS S.A DE C.V." 
+                              widgetVar="dialogVerManual" resizable="false" 
+                              showEffect="clip" hideEffect="clip" modal="false"
+                              closable="true" closeOnEscape="true"
+                              minimizable="true" maximizable="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+
+                            <p:outputLabel value="Manual de usuario"></p:outputLabel>
+                            <object type="application/pdf" data="#{facturaBean.manual}" height="650px" width="900px" internalinstanceid="5">
+                                Your browser can't display pdf, <a href="#{facturaBean.manual}">click</a> to download pdf instead.
+                            </object> 
+
+                        </p:panelGrid>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario para ver PDF-->
+
+
+
+                <!--Formulario para Editar-->
+                <h:form id="frmEdit">                    
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgModificarConcepto" header="Cancelar factura" widgetVar="dlgEdit" resizable="false" 
+                              showEffect="clip" hideEffect="clip" modal="true">
+                        <p:blockUI block="pnlEdit" trigger="editarCambios">   
+                            <h4 style="font-size: 15px; color: black">Cancelando factura, por favor espere...</h4>
+                            <p:graphicImage value="../Images/hourglass.gif" style="height: 80px; width: 80px"></p:graphicImage>
+                        </p:blockUI>
+                        <p:panel id="pnlEdit">
+                            <p:panelGrid columns="2" style="margin: 0 auto">
+                                <p:outputLabel value="Factura #"></p:outputLabel>
+                                <p:inputText readonly="true" value="#{facturaBean.factura.factura}"></p:inputText>
+                                <p:outputLabel value="Recepción #"></p:outputLabel>
+                                <p:inputText readonly="true" value="#{facturaBean.factura.referencia}"></p:inputText>
+                                <p:outputLabel value="Cancelar"></p:outputLabel>
+                                <p:selectOneMenu required="true" style="width: 200px;" value="#{facturaBean.factura.estatus}">
+                                    <f:selectItem  itemLabel="CANCELAR FACTURA" itemValue="CANCELADA"></f:selectItem>
+                                </p:selectOneMenu>
+                                <p:outputLabel for="comentario" value="Ingrese comentario" ></p:outputLabel>
+                                <p:inputTextarea id="comentario" required="true" style="width: 300px;" placeholder="Ingrese comentario por el cual cancela la factura" requiredMessage="Ingrese el motivo por el cual cancela la factura" value="#{facturaBean.factura.comentarioProveedor}"></p:inputTextarea>
+                            </p:panelGrid>
+                            <br></br>
+                            <p:spacer width="67.9%" height="10px"></p:spacer>
+                            <p:commandButton id="editarCambios" style="height: 30px; width: 150px;"
+                                             value="Cancelar factura"  actionListener="#{facturaBean.cancelarFactura()}"  update="mensaje,pnlEdit">
+                            </p:commandButton>
+                            <p:tooltip id="toolTipTrackCambios" for="editarCambios" trackMouse="true" value="Cancelar factura"></p:tooltip>                       
+                        </p:panel>
+                    </p:dialog>
+
+                </h:form>
+                <!--Formulario para Editar-->
+
+                <!--Formulario para ingresar datos de la factura-->
+                <h:form id="frmFactura" style="font-size: 12px">
+                    <p:dialog id="dlgFact" widgetVar="dlgFactura" header="Subir factura"
+                              showEffect="clip" hideEffect="explode" resizable="false" responsive="true">
+                        <p:panel id="pnlFact">
+                            <p:panelGrid id="pnlFactura" columns="2" style="margin: 0 auto">
+                                <p:outputLabel value=""></p:outputLabel>
+                                <p:inputText style="width: 300px;" value="#{procesarBean.importe}" label="" placeholder="" required="true" onkeyup="javascript:this.value = this.value.toUpperCase();"></p:inputText>
+                                <p:outputLabel value=""></p:outputLabel>
+                                <p:inputText style="width: 300px;" value="#{procesarBean.documento}" label="" placeholder="" required="true" onkeyup="javascript:this.value = this.value.toUpperCase();"></p:inputText>
+                                <p:outputLabel value=""></p:outputLabel>
+                                <p:inputText style="width: 300px;" value="#{procesarBean.po}" label="" placeholder="" required="true" onkeyup="javascript:this.value = this.value.toUpperCase();"></p:inputText>
+                                <p:outputLabel value=""></p:outputLabel>
+                                <p:selectOneMenu required="true" style="width: 200px;" label=""  value="#{procesarBean.moneda}">
+                                    <f:selectItem itemLabel="" itemValue=""></f:selectItem>
+                                    <f:selectItem itemLabel="" itemValue="2"></f:selectItem>
+                                    <f:selectItem itemLabel="" itemValue="3"></f:selectItem>
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:spacer width="400" height="5"></p:spacer>
+                        <p:commandButton id="track" style="height: 35px; width: 100px; background-image: url('../..//Images/save.png');background-size: 25px; background-repeat: no-repeat"  
+                                         value="Regstrar" update="frmBuscar:mensaje,pnlFact"  actionListener="#{procesarBean.registrarFactura()}" 
+                                         >
+                        </p:commandButton>
+                    </p:dialog>
+                </h:form>
+                <!--Formulario para ingresar datos de la factura-->
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

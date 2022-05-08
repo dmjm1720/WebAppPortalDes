@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2020 01:37:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.model.Usuario" table="USUARIO" schema="dbo" catalog="PortalProvNac" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="correo" type="string">
+            <column name="CORREO" length="50" />
+        </property>
+        <property name="codperfil" type="string">
+            <column name="CODPERFIL" length="50" />
+        </property>
+        <property name="rfc" type="string">
+            <column name="RFC" length="50" />
+        </property>
+        <property name="clave" type="string">
+            <column name="CLAVE" length="250" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="TELEFONO" length="50" />
+        </property>
+        <property name="activacion" type="string">
+            <column name="ACTIVACION" length="2" />
+        </property>
+        <property name="fecalta" type="timestamp">
+            <column name="FECALTA" length="23" />
+        </property>
+        <property name="enviarpass" type="string">
+            <column name="ENVIARPASS" length="2" />
+        </property>
+        <property name="enviaraviso" type="string">
+            <column name="ENVIARAVISO" length="2" />
+        </property>
+        <property name="codactivacion" type="string">
+            <column name="CODACTIVACION" length="50" />
+        </property>
+        <property name="responsable" type="string">
+            <column name="RESPONSABLE" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

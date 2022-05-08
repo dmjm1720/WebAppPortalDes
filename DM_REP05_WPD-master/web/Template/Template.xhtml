@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!--        <link href="../resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+        <h:outputStylesheet name="css/default.css"/>
+        <h:outputStylesheet name="css/cssLayout.css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Kufam" rel="stylesheet"></link>
+        <script src="../resources/js/sweetalert2@9.js" type="text/javascript"></script>
+        <title>DESAMEX</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+
+            <div id="menuPrincipal">
+                <h:form>
+                    <p:toolbar>
+                        <f:facet name="left">
+                            <p:menubar>
+                                <p:submenu label="INICIO" icon="ui-icon-home">                             
+                                    <p:menuitem value="INICIO" outcome="/Views/FacturaProveedores" icon="ui-icon-home"/>
+                                </p:submenu>  
+                                <p:submenu label="SUGERENCIAS" icon="ui-icon-home">                             
+                                    <p:menuitem value="SUGERENCIAS" outcome="/Views/Sugerencias" icon="ui-icon-wrench"/>
+                                </p:submenu>  
+                                <p:submenu label="FICHA DE DEPÓSITO" icon="ui-icon-home">                             
+                                    <p:menuitem value="FICHA DE DEPÓSITO" outcome="/Views/Deposito" icon="ui-icon-wrench"/>
+                                </p:submenu>  
+                            </p:menubar>
+                        </f:facet>
+                        <f:facet name="right">
+                            
+                        </f:facet>
+
+                    </p:toolbar>
+
+                </h:form>
+            </div>
+            <ui:insert name="top">
+
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+
+        </div>
+
+        <!--        <div id="bottom">
+                    <ui:insert name="bottom">&copy; 2019-DERECHOS RESERVADOS-DECORADOS Y SATINADOS MEXICANOS S.A DE C.V..</ui:insert>
+                </div>-->
+
+    </h:body>
+
+
+
+</html>

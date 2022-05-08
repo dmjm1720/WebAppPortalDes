@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/10/2020 01:37:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.model.Deposito" table="DEPOSITO" schema="dbo" catalog="PortalProvNac" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="banco" type="string">
+            <column name="BANCO" length="150" />
+        </property>
+        <property name="nocuenta" type="string">
+            <column name="NOCUENTA" length="50" />
+        </property>
+        <property name="clabe" type="string">
+            <column name="CLABE" length="18" />
+        </property>
+        <property name="titular" type="string">
+            <column name="TITULAR" length="150" />
+        </property>
+        <property name="archivo" type="string">
+            <column name="ARCHIVO" length="150" />
+        </property>
+        <property name="rfc" type="string">
+            <column name="RFC" length="50" />
+        </property>
+        <property name="solicitante" type="string">
+            <column name="SOLICITANTE" length="150" />
+        </property>
+        <property name="correo" type="string">
+            <column name="CORREO" length="50" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="FECHA" length="23" />
+        </property>
+    </class>
+</hibernate-mapping>

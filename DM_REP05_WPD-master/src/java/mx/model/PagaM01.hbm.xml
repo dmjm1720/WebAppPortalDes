@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/01/2021 12:11:55 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.model.PagaM01" table="PAGA_M01" schema="dbo" catalog="PortalProvNac" optimistic-lock="version">
+        <composite-id name="id" class="mx.model.PagaM01Id">
+            <key-property name="cveProv" type="string">
+                <column name="CVE_PROV" length="10" />
+            </key-property>
+            <key-property name="refer" type="string">
+                <column name="REFER" length="20" />
+            </key-property>
+            <key-property name="numCargo" type="int">
+                <column name="NUM_CARGO" />
+            </key-property>
+            <key-property name="numCpto" type="int">
+                <column name="NUM_CPTO" />
+            </key-property>
+        </composite-id>
+        <property name="cveFolio" type="string">
+            <column name="CVE_FOLIO" length="9" />
+        </property>
+        <property name="cveObs" type="java.lang.Integer">
+            <column name="CVE_OBS" />
+        </property>
+        <property name="noFactura" type="string">
+            <column name="NO_FACTURA" length="20" />
+        </property>
+        <property name="docto" type="string">
+            <column name="DOCTO" length="20" />
+        </property>
+        <property name="importe" type="java.lang.Double">
+            <column name="IMPORTE" precision="53" scale="0" />
+        </property>
+        <property name="fechaApli" type="timestamp">
+            <column name="FECHA_APLI" length="23" />
+        </property>
+        <property name="fechaVenc" type="timestamp">
+            <column name="FECHA_VENC" length="23" />
+        </property>
+        <property name="afecCoi" type="string">
+            <column name="AFEC_COI" length="1" />
+        </property>
+        <property name="numMoned" type="java.lang.Integer">
+            <column name="NUM_MONED" />
+        </property>
+        <property name="tcambio" type="java.lang.Double">
+            <column name="TCAMBIO" precision="53" scale="0" />
+        </property>
+        <property name="impmonExt" type="java.lang.Double">
+            <column name="IMPMON_EXT" precision="53" scale="0" />
+        </property>
+        <property name="fechaelab" type="timestamp">
+            <column name="FECHAELAB" length="23" />
+        </property>
+        <property name="ctlpol" type="java.lang.Integer">
+            <column name="CTLPOL" />
+        </property>
+        <property name="tipoMov" type="string">
+            <column name="TIPO_MOV" length="1" />
+        </property>
+        <property name="cveBita" type="java.lang.Integer">
+            <column name="CVE_BITA" />
+        </property>
+        <property name="signo" type="java.lang.Integer">
+            <column name="SIGNO" />
+        </property>
+        <property name="cveAut" type="java.lang.Integer">
+            <column name="CVE_AUT" />
+        </property>
+        <property name="usuario" type="java.lang.Short">
+            <column name="USUARIO" />
+        </property>
+        <property name="entregada" type="string">
+            <column name="ENTREGADA" length="1" />
+        </property>
+        <property name="fechaEntrega" type="timestamp">
+            <column name="FECHA_ENTREGA" length="23" />
+        </property>
+        <property name="refSist" type="string">
+            <column name="REF_SIST" length="1" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="ESTADO" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,437 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!--    <f:metadata>
+            <f:event type="preRenderView" listener="{filterByBean.listarTodo()}"/>
+        </f:metadata>-->
+    <body>
+
+        <ui:composition template="./../Template/Template2.xhtml">
+
+            <ui:define name="top">
+
+            </ui:define>
+
+            <ui:define name="content">
+                <p:idleMonitor  onactive="PF('sessionTimeOutDialog').show()" timeout="900000" />
+                <p:dialog style="font-size: 15px;" header="DECORADOS Y SATINADOS MEXICANOS S.A DE C.V." widgetVar="sessionTimeOutDialog" 
+                          modal="true" closable="false" width="1280" height="500" resizable="false" visible="false">                    
+                    <img src="../Images/expired.png"  alt=""/><br></br><br></br><br></br>
+                    <h:outputText style="color: #CC0505; font-size: 20px; font-weight: bold " value="Tu sesión actual ha expirado, para continuar cierra esta ventana o presiona F5 y vuelve a iniciar sesión." />
+                </p:dialog>
+                <!--Formulario para buscar número de referencia-->
+                <h:form>
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value="Sesión iniciada: #{loginBean.usuario.correo}"/><br></br> 
+                    <p:outputLabel style="color: #FFFFFF !important; font-weight: bold; font-size: 15px" value=" RFC: #{loginBean.usuario.rfc}"/><br></br>    
+                    <label style="color: #FFFFFF !important; font-size: 14px">Cerrar sesión</label>
+                    <p:commandLink id="salir" 
+                                   title="CERRAR SESIÓN"
+                                   action="/index?faces-redirect=true" 
+                                   actionListener="#{loginBean.cerrarSesion()}">
+                        <h:graphicImage url="../img/exit.png" style="height: 35px"/> 
+                    </p:commandLink>
+                </h:form>
+                <h:form id="frmBuscar">
+
+                    <p:growl id="mensaje" showSummary="true" life="50000" showDetail="true"></p:growl>
+                    <p:panel id="pnlBuscar">
+                        <p:toolbar>
+                            <f:facet name="left">                               
+                                <!--                                <p:spacer width="35%" height="1"></p:spacer>
+                                                                <p:outputLabel value="BUSCAR FACTURA POR:"></p:outputLabel><br></br>
+                                                                <p:commandButton id="rfc" oncomplete="PF('dlgFilterByRFC').show();" style="height: 25px;" value="RFC"></p:commandButton>
+                                                                <p:commandButton id="nfactura" oncomplete="PF('dlgFilterByFactura').show();" style="height: 25px;" value="No Factura"></p:commandButton>
+                                                                <p:commandButton id="frecepcion" oncomplete="PF('dlgFilterByFechas').show();" style="height: 25px;" value="Fechas de recepción"></p:commandButton>
+                                                                <p:commandButton id="fpago" oncomplete="PF('dlgFilterByPago').show();" style="height: 25px;" value="Fechas de pago"></p:commandButton>
+                                                                <p:commandButton id="nrecepcion" oncomplete="PF('dlgFilterByRecepcion').show();" style="height: 25px;" value="No de recepción"></p:commandButton>
+                                                                <p:commandButton id="fwcxp" oncomplete="PF('dlgFilterByWCXP').show();" style="height: 25px;" value="Folio WCXP"></p:commandButton>
+                                                                <p:commandButton id="estatus" oncomplete="PF('dlgFilterByEstatus').show();" style="height: 25px;" value="Estatus"></p:commandButton>                        -->
+                            </f:facet>
+                        </p:toolbar>                          
+                    </p:panel>
+                </h:form>
+
+                <!--Formulario principal-->
+
+                <h:form id="frmPrincipal">
+                    <p:tooltip id="toolExcel" for="xls" value="Exportar a Excel" trackMouse="true"></p:tooltip>
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:panel id="pnlPrincipal" header="LISTA DE FACTURAS PROVEEDORES (ÚLTIMAS 500 RECEPCIONES)" style="margin: 0 auto; text-align: center; font-size: 13px">
+                        <label>EXPORTAR INFORMACIÓN A EXCEL </label>&nbsp;
+                        <h:commandLink id="xls">
+                            <p:graphicImage url="../Images/excel.png" width="50"/>
+                            <p:dataExporter type="xls" target="tblPrincipal" fileName="Proveedores"></p:dataExporter>
+                        </h:commandLink>
+                        <p:layoutUnit id="tablaPrincipal" position="center" style="padding: 5px; text-align: center;">
+                            <p:dataTable style="font-size: 9px" id="tblPrincipal" paginator="true" rows="13" sortMode="multiple"
+                                         paginatorPosition="top" var="tbl" value="#{filterByBean.listarUltRecep()}">                           
+                                <p:ajax event="sort" skipChildren="false" />
+                                <p:column  headerText="ESTATUS SAT">
+                                    <h:outputText value="#{tbl.estatusSat}"/>
+                                </p:column>
+                                <p:column filterBy="#{tbl.rfcE}" sortBy="#{tbl.rfcE}" headerText="RFC">
+                                    <h:outputText value="#{tbl.rfcE}"></h:outputText>
+                                </p:column>
+                                <p:column filterBy="#{tbl.nombreE}" sortBy="#{tbl.nombreE}" headerText="Nombre">
+                                    <h:outputText value="#{tbl.nombreE}"></h:outputText>
+                                </p:column>
+                                <p:column filterBy="#{tbl.factura}" sortBy="#{tbl.factura}" headerText="Factura #">
+                                    <h:outputText value="#{tbl.factura}"></h:outputText>
+                                </p:column>
+                                <p:column  headerText="Fecha factura">
+                                    <h:outputText value="#{tbl.fecha}"></h:outputText>
+                                </p:column>
+                                <p:column  headerText="UUID Factura">
+                                    <h:outputText value="#{tbl.uuid}"></h:outputText>
+                                </p:column>
+<!--                                <p:column  headerText="UUID Comprobante">
+                                    <h:outputText value="#{tbl.uuidrel}"></h:outputText>
+                                </p:column>-->
+                                <p:column headerText="$ Total a pagar">
+                                    <h:outputText value="#{tbl.total}">
+                                        <f:convertNumber currencySymbol="$" type="currency"></f:convertNumber>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column filterBy="#{tbl.referencia}" sortBy="#{tbl.referencia}"  headerText="Recepción #">
+                                    <h:outputText value="#{tbl.referencia}"></h:outputText>
+                                </p:column>
+                                <p:column filterBy="#{tbl.oc}" sortBy="#{tbl.oc}"  headerText="OC">
+                                    <h:outputText value="#{tbl.oc}"></h:outputText>
+                                </p:column>
+                                <p:column filterBy="#{tbl.cheque}" sortBy="#{tbl.cheque}"  headerText="Cheque">
+                                    <h:outputText value="#{tbl.cheque}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="# Transferencia">
+                                    <h:outputText value="#{tbl.noTransferencia}"/>
+                                </p:column>
+                                <p:column filterBy="#{tbl.foliowcxp}" sortBy="#{tbl.foliowcxp}" headerText="WCXP">
+                                    <h:outputText value="WCXP#{tbl.foliowcxp}"></h:outputText>
+                                </p:column>
+                                <p:column  headerText="Fecha de recepción">
+                                    <h:outputText value="#{tbl.fechaRecepcion.substring(0,19)}"></h:outputText>
+                                </p:column>
+                                <p:column  headerText="Fecha probable de pago">
+                                    <h:outputText value="#{tbl.fechaPago}"></h:outputText>
+                                </p:column>
+                                <p:column filterBy="#{tbl.estatus}" sortBy="#{tbl.estatus}" headerText="Estatus pago">
+                                    <h:outputText value="#{tbl.estatus}" style="#{tbl.estatus eq 'RECIBIDA' ? 'color: black; background-color: #FFE033;font-weight: bold; font-size: 9px;'
+                                                           :(tbl.estatus eq 'PAGADA' ? 'color: black; background-color: #F9FF33;font-weight: bold; font-size: 9px;' : 'color: black; background-color: #37F728;font-weight: bold; font-size: 13px;')}"/>
+
+                                </p:column>
+<!--                                <p:column filterBy="#{tbl.estatusCom}" sortBy="#{tbl.estatusCom}" headerText="Comprobante">
+                                    <h:outputText value="#{tbl.estatusCom}" style="#{tbl.estatusCom eq 'NO EMITIDO' ? 'color: black; background-color: #FF5733;font-weight: bold; font-size: 13px;'
+                                                           :(tbl.estatusCom eq 'PENDIENTE' ? 'color: black; background-color: #F9FF33;font-weight: bold; font-size: 13px;' : 'color: black; background-color: #37F728;font-weight: bold; font-size: 13px;')}"/>
+                                </p:column>-->
+                                <p:column headerText="Ver factura" exportable="false">
+                                    <p:commandButton value="" disabled="#{tbl.wcxp!=NULL}"
+                                                     oncomplete="PF('dialogVerXML').show();" update="frmVerXML"
+                                                     style="height: 35px; width: 35px;
+                                                     background-size: 35px;
+                                                     background-image: url('../Images/factura.png') !important; 
+                                                     background-repeat: no-repeat">
+                                        <f:setPropertyActionListener target="#{filterByBean.factura}" value="#{tbl}"></f:setPropertyActionListener>
+                                    </p:commandButton>
+                                </p:column>
+<!--                                <p:column headerText="Ver complemento" exportable="false">
+                                    <p:commandButton value="" disabled="#{tbl.wcxp!=NULL}"
+                                                     oncomplete="PF('dialogVerComp').show();" update="frmVerComp"
+                                                     style="height: 35px; width: 35px;
+                                                     background-size: 35px;
+                                                     background-image: url('../Images/factura.png') !important; 
+                                                     background-repeat: no-repeat">
+                                        <f:setPropertyActionListener target="#{filterByBean.factura}" value="#{tbl}"></f:setPropertyActionListener>
+                                    </p:commandButton>
+                                </p:column>-->
+                                <p:column headerText="Actualizar fecha de pago" exportable="false">
+                                    <p:commandButton disabled="#{tbl.estatus eq 'PAGADA'}" value=""
+                                                     oncomplete="PF('dlgUpdatePayment').show()" update="fmrFecPago"
+                                                     style="height: 35px; width: 35px;
+                                                     background-size: 35px;
+                                                     background-image: url('../Images/calendar.png') !important; 
+                                                     background-repeat: no-repeat">
+                                        <f:setPropertyActionListener target="#{filterByBean.factura}" value="#{tbl}"></f:setPropertyActionListener>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>                      
+                        </p:layoutUnit>                    
+                    </p:panel>                
+                </h:form>
+                <!--Formulario principal-->
+
+                <!--FORMULARIO PARA VER EL PDF DEL XML-->
+                <h:form id="frmVerXML">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgVerXML" header="Visualizar factura del XML" widgetVar="dialogVerXML" resizable="false" 
+                              showEffect="clip" hideEffect="size" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="UUID"></p:outputLabel>
+                            <p:inputText id="uuid" value="#{filterByBean.factura.uuid}" style="width: 250px" readonly="true"></p:inputText>
+                        </p:panelGrid><br></br>
+                        <p:spacer width="100px" height="5px"></p:spacer>
+                        <h:commandLink id="reporte" 
+                                       value="" 
+                                       style="height: 30px;  font-size: 16px" 
+                                       target="_blank" 
+                                       actionListener="#{facturaBean.visualizarCFDI_PDF()}" onclick="PF('dialogVerXML').hide()">
+                            <h:graphicImage url="/Images/printer.png" style="height: 80px"/> 
+                        </h:commandLink>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA VER EL PDF DEL XML-->
+                <!--FORMULARIO PARA VER EL PDF DEL COMPLEMENTO DEL XML-->
+                <h:form id="frmVerComp">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgVerComp" header="Visualizar factura del XML" widgetVar="dialogVerComp" resizable="false" 
+                              showEffect="clip" hideEffect="size" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="UUID"></p:outputLabel>
+                            <p:inputText id="uuidrel" value="#{filterByBean.factura.uuidrel}" style="width: 250px" readonly="true"></p:inputText>
+                        </p:panelGrid><br></br>
+                        <p:spacer width="100px" height="5px"></p:spacer>
+                        <h:commandLink id="reporte" 
+                                       value="" 
+                                       style="height: 30px;  font-size: 16px" 
+                                       target="_blank" 
+                                       actionListener="#{facturaBean.visualizarCFDI_COMP()}" onclick="PF('dialogVerComp').hide()">
+                            <h:graphicImage url="/Images/printer.png" style="height: 80px"/> 
+                        </h:commandLink>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA VER EL PDF DEL COMPLEMENTO DEL XML-->
+
+
+
+
+
+                <!--FORMULARIO PARA BUSCAR POR RFC-->
+                <h:form id="frmRFC">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgRFC" header="Buscar facfura por RFC" 
+                              widgetVar="dlgFilterByRFC" resizable="false" 
+                              showEffect="puff" hideEffect="clip" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="Seleccionar RFC" for="byRFC" />
+                            <p:autoComplete id="byRFC" size="40" placeholder="Ingresa p. ej AA o ZZ" 
+                                            dropdown="true" value="#{filterByBean.filterRFC}" 
+                                            completeMethod="#{filterByBean.completeRFC}"/>                    
+                        </p:panelGrid><br></br>
+                        <p:spacer width="140px" height="5px"></p:spacer>
+                        <p:commandButton id="buscarRFC" 
+                                         value="" 
+                                         style="height: 40px; width: 40px;  font-size: 16px; background-image: url('../Images/buscar.png'); background-size: 40px; background-repeat: no-repeat" 
+                                         actionListener="#{filterByBean.listarAll()}" 
+                                         update="frmPrincipal" 
+                                         oncomplete="PF('dlgFilterByRFC').hide()">
+                            <p:tooltip for="buscarRFC" value="Clic para buscar factura por RFC" trackMouse="true"></p:tooltip>
+                        </p:commandButton>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA BUSCAR POR RFC-->
+
+                <!--FORMULARIO PARA BUSCAR POR FACTURA-->
+                <h:form id="frmFactura">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgFactura" header="Buscar facfura por Factura" 
+                              widgetVar="dlgFilterByFactura" resizable="false" 
+                              showEffect="puff" hideEffect="clip" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="Seleccionar Factura" for="byFactura" />
+                            <p:autoComplete id="byFactura" size="40" placeholder="Ingresa p. ej AA o ZZ" 
+                                            dropdown="true" value="#{filterByBean.filterFactura}" 
+                                            completeMethod="#{filterByBean.completeFactura}"/>                    
+                        </p:panelGrid><br></br>
+                        <p:spacer width="140px" height="5px"></p:spacer>
+                        <p:commandButton id="buscarFac" 
+                                         value="" 
+                                         style="height: 40px; width: 40px;  font-size: 16px; background-image: url('../Images/buscar.png'); background-size: 40px; background-repeat: no-repeat"  
+                                         actionListener="#{filterByBean.listarAll()}" 
+                                         update="frmPrincipal" 
+                                         oncomplete="PF('dlgFilterByFactura').hide()">
+                            <p:tooltip for="buscarFac" value="Clic para buscar factura" trackMouse="true"></p:tooltip>
+                        </p:commandButton>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA BUSCAR POR FACTURA-->
+
+                <!--FORMULARIO PARA BUSCAR POR FECHAS-->
+                <h:form id="frmFechas">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgFechas" header="Buscar facfura por Fechas" 
+                              widgetVar="dlgFilterByFechas" resizable="false" 
+                              showEffect="puff" hideEffect="clip" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="Fecha inicial" ></p:outputLabel>
+                            <p:calendar  id="fecha_inicio" yearRange="2014:2025"  
+                                         effect="blind" effectDuration="13000" pages="2" showOn="button" 
+                                         style="width: 150px;" value="#{filterByBean.filterFec1}" 
+                                         required="true" placeholder="Ingrese fecha inicial"
+                                         pattern="yyyy-MMMM-dd" mask="true">
+                            </p:calendar>                   
+                            <p:calendar  id="fecha_final" yearRange="2014:2025"  
+                                         effect="blind" effectDuration="13000" pages="2" showOn="button" 
+                                         style="width: 150px;" value="#{filterByBean.filterFec2}" 
+                                         required="true" placeholder="Ingrese fecha final"
+                                         pattern="yyyy-MMMM-dd" mask="true">
+                            </p:calendar>                   
+                        </p:panelGrid><br></br>
+                        <p:spacer width="140px" height="5px"></p:spacer>
+                        <p:commandButton id="buscarFec" 
+                                         value="" 
+                                         style="height: 40px; width: 40px;  font-size: 16px; background-image: url('../Images/buscar.png'); background-size: 40px; background-repeat: no-repeat"  
+                                         actionListener="#{filterByBean.listarAll()}" 
+                                         update="frmPrincipal" 
+                                         oncomplete="PF('dlgFilterByFechas').hide()">
+                            <p:tooltip for="buscarFec" value="Clic para buscar factura" trackMouse="true"></p:tooltip>
+                        </p:commandButton>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA BUSCAR POR FECHAS-->
+
+                <!--FORMULARIO PARA BUSCAR POR FECHAS DE PAGO-->
+                <h:form id="frmPago">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgFechas" header="Buscar facfura por Fecha de pago" 
+                              widgetVar="dlgFilterByPago" resizable="false" 
+                              showEffect="puff" hideEffect="clip" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="Fecha inicial" ></p:outputLabel>
+                            <p:calendar  id="fecha_ini" yearRange="2014:2025"  
+                                         effect="blind" effectDuration="13000" pages="2" showOn="button" 
+                                         style="width: 150px;" value="#{filterByBean.filterFec3}" 
+                                         required="true" placeholder="Ingrese fecha inicial"
+                                         pattern="yyyy-MMMM-dd" mask="true">
+                            </p:calendar>                   
+                            <p:calendar  id="fecha_fin" yearRange="2014:2025"  
+                                         effect="blind" effectDuration="13000" pages="2" showOn="button" 
+                                         style="width: 150px;" value="#{filterByBean.filterFec4}" 
+                                         required="true" placeholder="Ingrese fecha final"
+                                         pattern="yyyy-MMMM-dd" mask="true">
+                            </p:calendar>                   
+                        </p:panelGrid><br></br>
+                        <p:spacer width="140px" height="5px"></p:spacer>
+                        <p:commandButton id="buscarFecPago" 
+                                         value="" 
+                                         style="height: 40px; width: 40px;  font-size: 16px; background-image: url('../Images/buscar.png'); background-size: 40px; background-repeat: no-repeat"  
+                                         actionListener="#{filterByBean.listarAll()}" 
+                                         update="frmPrincipal" 
+                                         oncomplete="PF('dlgFilterByPago').hide()">
+                            <p:tooltip for="buscarFecPago" value="Clic para buscar factura" trackMouse="true"></p:tooltip>
+                        </p:commandButton>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA BUSCAR POR FECHAS DE PAGO-->
+
+                <!--FORMULARIO PARA BUSCAR POR RECEPCION-->
+                <h:form id="frmRecepcion">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgRecepcion" header="Buscar facfura por Recepción" 
+                              widgetVar="dlgFilterByRecepcion" resizable="false" 
+                              showEffect="puff" hideEffect="clip" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="Seleccionar Recepción" for="byRecepcion" />
+                            <p:autoComplete id="byRecepcion" size="40" placeholder="Ingresa p. ej AA o ZZ" 
+                                            dropdown="true" value="#{filterByBean.filterNoRec}" 
+                                            completeMethod="#{filterByBean.completeRecepcion}"/>                    
+                        </p:panelGrid><br></br>
+                        <p:spacer width="140px" height="5px"></p:spacer>
+                        <p:commandButton id="buscarRec" 
+                                         value="" 
+                                         style="height: 40px; width: 40px;  font-size: 16px; background-image: url('../Images/buscar.png'); background-size: 40px; background-repeat: no-repeat"  
+                                         actionListener="#{filterByBean.listarAll()}" 
+                                         update="frmPrincipal" 
+                                         oncomplete="PF('dlgFilterByRecepcion').hide()">
+                            <p:tooltip for="buscarRec" value="Clic para buscar Recepción" trackMouse="true"></p:tooltip>
+                        </p:commandButton>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA BUSCAR POR RECEPCION-->
+
+
+                <!--FORMULARIO PARA BUSCAR POR WCXP-->
+                <h:form id="frmWCXP">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgWCXP" header="Buscar facfura por folio" 
+                              widgetVar="dlgFilterByWCXP" resizable="false" 
+                              showEffect="puff" hideEffect="clip" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="Seleccionar WCXP" for="byWCXP" />
+                            <p:autoComplete id="byWCXP" size="40" placeholder="Ingresa p. ej AA o ZZ" 
+                                            dropdown="true" value="#{filterByBean.filterFolio}" 
+                                            completeMethod="#{filterByBean.completeFolio}"/>                    
+                        </p:panelGrid><br></br>
+                        <p:spacer width="140px" height="5px"></p:spacer>
+                        <p:commandButton id="buscarWCXP" 
+                                         value="" 
+                                         style="height: 40px; width: 40px;  font-size: 16px; background-image: url('../Images/buscar.png'); background-size: 40px; background-repeat: no-repeat"  
+                                         actionListener="#{filterByBean.listarAll()}" 
+                                         update="frmPrincipal" 
+                                         oncomplete="PF('dlgFilterByWCXP').hide()">
+                            <p:tooltip for="buscarWCXP" value="Clic para buscar WCXP" trackMouse="true"></p:tooltip>
+                        </p:commandButton>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA BUSCAR POR WCXP-->
+
+                <!--FORMULARIO PARA BUSCAR POR ESTATUS-->
+                <h:form id="frmEstatus">
+                    <p:growl id="mensaje" showSummary="true" showDetail="true"></p:growl>
+                    <p:dialog style="font-size: 12px;" id="dlgEstatus" header="Buscar facfura por estatus" 
+                              widgetVar="dlgFilterByEstatus" resizable="false" 
+                              showEffect="puff" hideEffect="clip" modal="true">
+                        <p:panelGrid columns="1" style="margin: 0 auto">
+                            <p:outputLabel value="Seleccionar Estatus" for="byEstatus" />
+                            <p:autoComplete id="byEstatus" size="40" placeholder="Ingresa p. ej AA o ZZ" 
+                                            dropdown="true" value="#{filterByBean.filterEstatus}" 
+                                            completeMethod="#{filterByBean.completeEstatus}"/>                    
+                        </p:panelGrid><br></br>
+                        <p:spacer width="140px" height="5px"></p:spacer>
+                        <p:commandButton id="buscarEstatus" 
+                                         value="" 
+                                         style="height: 40px; width: 40px;  font-size: 16px; background-image: url('../Images/buscar.png'); background-size: 40px; background-repeat: no-repeat" 
+                                         actionListener="#{filterByBean.listarAll()}" 
+                                         update="frmPrincipal" 
+                                         oncomplete="PF('dlgFilterByEstatus').hide()">
+                            <p:tooltip for="buscarEstatus" value="Clic para buscar por Estatus" trackMouse="true"></p:tooltip>
+                        </p:commandButton>                       
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA BUSCAR POR ESTATUS-->
+
+                <!--FORMULARIO PARA ACTUALIZAR LA FECHA  DE PAGO-->
+                <h:form id="fmrFecPago" style="font-size: 12px">
+                    <p:dialog id="dialogoFecPago" header="Actualizar fecha de pago" resizable="false"
+                              widgetVar="dlgUpdatePayment" modal="true" showEffect="cliṕ" hideEffect="clip"
+                              width="450" height="150">
+                        <p:panelGrid columns="2" style="margin: 0 auto">
+                            <p:outputLabel value="Actualizar fecha de pago"></p:outputLabel>
+                            <h:inputText value="#{filterByBean.factura.fechaPago}"></h:inputText>
+                            <p:outputLabel value="Cambiar Estatus" ></p:outputLabel>
+                            <p:selectOneMenu required="true" value="#{filterByBean.factura.estatus}">
+                                <f:selectItem itemLabel="PAGADA" itemValue="PAGADA"></f:selectItem>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                        <p:spacer height="30px" width="200px"></p:spacer>
+                        <p:commandButton id="btnCancelar" value="Cancelar" oncomplete="PF('dlgUpdatePayment').hide()"></p:commandButton>     
+                        <p:commandButton id="btnActualizar" value="Actualizar" oncomplete="PF('dlgUpdatePayment').hide()" 
+                                         actionListener="#{filterByBean.actualizarFechaPago()}"
+                                         update="frmPrincipal,frmPrincipal:mensaje">
+                        </p:commandButton> 
+                        <p:tooltip id="toolBtn" for="btnActualizar" value="Actualizar nueva fecha de pago" trackMouse="true"></p:tooltip>
+                        <p:tooltip id="toolBtnCan" for="btnCancelar" value="Cancelar" trackMouse="true"></p:tooltip>
+                    </p:dialog>
+                </h:form>
+                <!--FORMULARIO PARA ACTUALIZAR LA FECHA  DE PAGO-->
+
+
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,52 @@
+
+
+body {
+    background-color: #FFFFFF !important; 
+    /*    background-image: url('../..//img/blue.jpg');*/
+    /*#036FAB #AED2D9*/
+    font-size: 10px;
+    font-family: 'Orbitron', sans-serif;
+    margin: 10px;
+}
+
+h1  {
+    font-family: 'Comfortaa', sans-serif;
+    font-size:  45px !important;
+    font-weight: bold;
+    margin: 10px;
+    padding: 0px;
+    color: #FFFFFF !important;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size:  20px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    color: #000033;
+}
+h3 {
+    font-family: 'Questrial', sans-serif;
+    font-size:  18px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    color: white;
+}
+
+a:link, a:visited {
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+    color: #045491;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
